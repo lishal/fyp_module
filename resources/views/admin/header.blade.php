@@ -1,7 +1,7 @@
 <header class="main-header">
 
   <!-- Logo -->
-  <a href="#" class="logo">
+  <a href="/home" class="logo">
     <!-- logo for regular state and mobile devices -->
     <span class="logo-lg"><b>Book</b> Keeping</span>
   </a>
@@ -19,19 +19,18 @@
         <li class="dropdown user user-menu">
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <!-- The user image in the navbar-->
-            <img src="{{ url('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">{{ \Auth::user()->first_name.' '.\Auth::user()->last_name }}</span>
+            <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="user-image" alt="User Image">
+          <span class="hidden-xs">{{ Auth::user()->name }}</span>
           </a>
+          
+          
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <img src="{{ url('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-
+              <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle"  alt="User Image">
               <p>
-                {{ \Auth::user()->first_name.' '.\Auth::user()->last_name }}
-                <small>@if(\Auth::user()->user_type_id == 0) {{ 'Admin User' }} @elseif(\Auth::user()->user_type_id == 1) {{ 'Company Owner' }} @else  {{ 'Normal User' }} @endif </small>
+                
+                <small>@if(\Auth::user()->user_type_id == 0) {{  Auth::user()->name }} @elseif(\Auth::user()->user_type_id == 1) {{ 'Company Owner' }} @else  {{ 'Normal User' }} @endif </small>
               </p>
             </li>
             <!-- Menu Body -->
@@ -52,7 +51,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="{{ url('/user/profile') }}" class="btn btn-default btn-flat">Profile</a>
+                <a id="Btn" href="{{ url('/profile') }}" class="btn btn-default btn-flat">Profile</a>
               </div>
               <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}

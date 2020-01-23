@@ -4,7 +4,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="{{ url('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="Deals User">
+        <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle" alt="Deals User">
       </div>
       <div class="pull-left info">
         <p>{{ \Auth::user()->first_name.' '.\Auth::user()->last_name }}</p>
