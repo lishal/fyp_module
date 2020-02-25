@@ -20,7 +20,7 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="user-image" alt="User Image">
-          <span class="hidden-xs">{{ Auth::user()->name }}</span>
+          <span class="hidden-xs">{{ \Auth::user()->first_name.' '.\Auth::user()->last_name}}</span>
           </a>
           
           
@@ -30,7 +30,7 @@
               <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle"  alt="User Image">
               <p>
                 
-                <small>@if(\Auth::user()->user_type_id == 0) {{  Auth::user()->name }} @elseif(\Auth::user()->user_type_id == 1) {{ 'Company Owner' }} @else  {{ 'Normal User' }} @endif </small>
+                <h4 style="color:white">@if(\Auth::user()->user_type_id == 0) {{  \Auth::user()->first_name.' '.\Auth::user()->last_name}} @elseif(\Auth::user()->user_type_id == 1) {{ 'Company Owner' }} @else  {{ 'Normal User' }} @endif </h4>
               </p>
             </li>
             <!-- Menu Body -->
