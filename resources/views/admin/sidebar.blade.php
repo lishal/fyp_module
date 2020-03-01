@@ -17,7 +17,7 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">ADMIN MENU</li>
       @if(\Auth::user()->id == '1')
-        <li class="@if(Request::is('*/types*')) {{ 'active' }} @endif"><a href="{{ url('/admin/types') }}"><i class="fa fa-database"></i> <span>Types</span></a></li>
+        <li class="@if(Request::is('*type*')) {{ 'active' }} @endif"><a href="{{ url('/type') }}"><i class="fa fa-database"></i> <span>Types</span></a></li>
         <li class="@if(Request::is('*/companies*')) {{ 'active' }} @endif"><a href="{{ url('/admin/companies') }}"><i class="fa fa-table"></i> <span>Ledger</span></a></li>
         <li class="@if(Request::is('*/users*')) {{ 'active' }} @endif"><a href="{{ url('/admin/users') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
       @endif

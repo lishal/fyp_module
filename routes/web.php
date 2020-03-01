@@ -21,6 +21,10 @@ Route::get('/profile','UserController@profile');
 Route::POST('/profile', 'UserController@update_profile');
 Route::POST('/update_password', 'UserController@update_password');
 
+Route::get('/type','TypeController@index');
+Route::get('/type/edit','TypeController@edit');
+Route::POST('/type/save','TypeController@save');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');

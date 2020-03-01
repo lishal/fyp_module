@@ -55,7 +55,7 @@
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="/update_password">
-                            {!! csrf_field() !!}
+                            @csrf
 
                             <div class="form-group old_password">
                                 <label class="col-md-2 control-label">Old Password*</label>

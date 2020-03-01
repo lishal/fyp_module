@@ -57,7 +57,7 @@ class UserController extends Controller
 		$user = Auth::user();
 		$this->validate($request, [
 			'old_password' => 'required',
-			'new_password' => 'required|confirmed|min:6|max:25',
+			'new_password' => 'required|confirmed|min:8|max:25',
 			
 		]);
 		if (Hash::check($request->old_password, $user->password)){
