@@ -84,9 +84,34 @@ class TypeController extends Controller
 	{
 	    $this->validate($request, [
             'name' => 'required|min:3|max:255',
-            'long_desc' =>'required',
+            'description' =>'required',
             'account_type'=> 'required'
         ]);
+
+        $type_id = $this->request->input('type_id');
+    	$name = $this->request->input('name');
+    	$description = $this->request->input('description');
+        $account_type = $this->request->input('account_type');
+        
+        $data = [
+            'name' => $name, 
+            'description' => $description,
+            'account_type' =>$account_type,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+    
+    if($type_id == 0) {
+        $data['created_at'] = date('Y-m-d H:i:s');
+        \DB::table('types')->insert($data);
+        $message = "Record added successfully.";
+    }
+    else {
+        \DB::table('types')
+        ->where('id', $type_id)
+        ->update($data);
+        $message = "Record updated successfully.";
+    }
+
         return redirect('/type')->with('success','Record Added');
     }
 

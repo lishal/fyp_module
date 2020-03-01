@@ -25,10 +25,10 @@
 
 
                      <div class="form-group long_description">
-                        <label class="col-md-2 control-label">Long Description*</label>
+                        <label class="col-md-2 control-label">Description*</label>
 
                         <div class="col-md-7">
-                            <textarea class="form-control" placeholder="Long Description" id="long_desc" name="long_desc" rows="8">{{ old('long_desc')? old('long_desc'): ($type->long_desc? $type->long_desc: '') }}</textarea>
+                            <textarea class="form-control" placeholder="Description" id="description" name="description" rows="8">{{ old('description')? old('description'): ($type->description? $type->description: '') }}</textarea>
                         </div>
                     </div>
 
@@ -39,12 +39,12 @@
                             <select class="form-control" name="account_type">
                                 @if(old('account_type'))
                                     <option value="" {{ old('account_type')==""?'selected':''}} >Please select</option>
-                                    <option value="1" {{ old('account_type')=="1"?'selected':''}} >Debit</option>
-                                    <option value="2" {{ old('account_type')=="2"?'selected':''}} >Credit</option>
+                                    <option value="Debit" {{ old('account_type')=="1"?'selected':''}} >Debit</option>
+                                    <option value="Credit" {{ old('account_type')=="2"?'selected':''}} >Credit</option>
                                 @else
                                     <option value="" {{ $type->account_type == ""?'selected':''}} >Please select</option>
-                                    <option value="1" {{ $type->account_type == "1"?'selected':''}} >Debit</option>
-                                    <option value="2" {{ $type->account_type == "2"?'selected':''}} >Credit</option>
+                                    <option value="Debit" {{ $type->account_type == "1"?'selected':''}} >Debit</option>
+                                    <option value="Credit" {{ $type->account_type == "2"?'selected':''}} >Credit</option>
                                 @endif
                             </select>
                         </div> 
@@ -65,7 +65,7 @@
 @section('scripts')
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
-    CKEDITOR.replace( 'long_desc' );
+    CKEDITOR.replace( 'description' );
 </script>
 
 @endsection
