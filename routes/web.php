@@ -22,7 +22,7 @@ Route::POST('/profile', 'UserController@update_profile');
 Route::POST('/update_password', 'UserController@update_password');
 
 Route::get('/type','TypeController@index');
-Route::get('/type/edit','TypeController@edit');
+Route::get('/type/edit/{id?}','TypeController@edit');
 Route::POST('/type/save','TypeController@save');
 
 

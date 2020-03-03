@@ -14,7 +14,7 @@
 
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/type/save') }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="type_id" id="type_id" value="{{ $type->id or '0' }}">
+                    <input type="hidden" name="type_id" id="type_id" value="{{ $type->id }}">
                     <div class="form-group type_name">
                         <label class="col-md-2 control-label">Type Name*</label>
 
@@ -39,12 +39,12 @@
                             <select class="form-control" name="account_type">
                                 @if(old('account_type'))
                                     <option value="" {{ old('account_type')==""?'selected':''}} >Please select</option>
-                                    <option value="Debit" {{ old('account_type')=="1"?'selected':''}} >Debit</option>
-                                    <option value="Credit" {{ old('account_type')=="2"?'selected':''}} >Credit</option>
+                                    <option value="Debit" {{ old('account_type')=="Debit"?'selected':''}} >Debit</option>
+                                    <option value="Credit" {{ old('account_type')=="Credit"?'selected':''}} >Credit</option>
                                 @else
                                     <option value="" {{ $type->account_type == ""?'selected':''}} >Please select</option>
-                                    <option value="Debit" {{ $type->account_type == "1"?'selected':''}} >Debit</option>
-                                    <option value="Credit" {{ $type->account_type == "2"?'selected':''}} >Credit</option>
+                                    <option value="Debit" {{ $type->account_type == "Debit"?'selected':''}} >Debit</option>
+                                    <option value="Credit" {{ $type->account_type == "Credit"?'selected':''}} >Credit</option>
                                 @endif
                             </select>
                         </div> 

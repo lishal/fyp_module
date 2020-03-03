@@ -20,7 +20,6 @@ class TypeController extends Controller
     public function __construct(type $types, Request $request)
     {
         $this->middleware('auth');
-
         $this->types = $types;
         $this->request = $request;
     }
@@ -70,11 +69,11 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function edit($typeId=0)
+    public function edit($type_id=0)
     {
         $type = new Type();
-        if($typeId > 0) {
-            $type = $type->where('id', $typeId)->first();
+        if($type_id > 0) {
+            $type = $type->where('id', $type_id)->first();
         }
 
         return view('type.add_type', ['type' => $type]);
@@ -110,9 +109,9 @@ class TypeController extends Controller
         ->where('id', $type_id)
         ->update($data);
         $message = "Record updated successfully.";
+        //  return($type_id);
     }
-
-        return redirect('/type')->with('success','Record Added');
+         return redirect('/type')->with('success','Record Added');
     }
 
     /**

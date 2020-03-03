@@ -31,16 +31,16 @@
 
                 <!-- Table Body -->
                 <tbody>
-                    @if (count($types ?? '') > 0)
-                        @foreach ($types ?? '' as $type)
+                    @if (count($types) > 0)
+                        @foreach ($types as $type)
                             <tr>
                                 <td>{{ $type->name }}</td>
                                 <td>{{ $type->account_type }}</td>
                                 <td>{{ $type->created_at }}</td>
                                 <td>{{ $type->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/types/edit') }}/{{ $type->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
-                                    <a href="{{ url('/types/delete') }}/{{ $type->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
+                                    <a href="{{ url('type/edit') }}/{{ $type->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
+                                    <a href="{{ url('type/delete') }}/{{ $type->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
                                 </td>
                             </tr>
                         @endforeach
