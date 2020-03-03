@@ -114,6 +114,16 @@ class TypeController extends Controller
          return redirect('/type')->with('success','Record Added');
     }
 
+    public function delete($id){
+        $type = Type::find($id);
+        if($type->delete()){
+            return redirect('type')->with('success','Type deleted successfully.');
+        }
+        else{
+            return redirect('type')->with('error','Something went wrong. Please try again.');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *

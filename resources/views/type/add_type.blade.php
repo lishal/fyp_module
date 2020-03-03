@@ -68,4 +68,5 @@
     CKEDITOR.replace( 'description' );
 </script>
 
+
 @endsection

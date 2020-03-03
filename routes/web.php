@@ -23,6 +23,7 @@ Route::POST('/update_password', 'UserController@update_password');
 
 Route::get('/type','TypeController@index');
 Route::get('/type/edit/{id?}','TypeController@edit');
+Route::get('/type/delete/{id?}','TypeController@delete');
 Route::POST('/type/save','TypeController@save');
 
 
