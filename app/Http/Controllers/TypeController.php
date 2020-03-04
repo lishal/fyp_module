@@ -81,37 +81,46 @@ class TypeController extends Controller
 
     public function save(Request $request)
 	{
-	    $this->validate($request, [
-            'name' => 'required|min:3|max:255',
-            'description' =>'required',
-            'account_type'=> 'required'
-        ]);
+        switch ($request->input('action')) {
+            case 'save':
+                $this->validate($request, [
+                    'name' => 'required|min:3|max:255',
+                    'description' =>'required',
+                    'account_type'=> 'required'
+                ]);
+                $type_id = $this->request->input('type_id');
+                $name = $this->request->input('name');
+                $description = $this->request->input('description');
+                $account_type = $this->request->input('account_type');
+                
+                $data = [
+                    'name' => $name, 
+                    'description' => $description,
+                    'account_type' =>$account_type,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+            
+                if($type_id == 0) {
+                    $data['created_at'] = date('Y-m-d H:i:s');
+                    \DB::table('types')->insert($data);
+                    $message = "Record added successfully.";
+                }
+                else {
+                    \DB::table('types')
+                    ->where('id', $type_id)
+                    ->update($data);
+                    $message = "Record updated successfully.";
+                    //  return($type_id);
+                }
+                    return redirect('/type')->with('success','Record Added');
+            break;
 
-        $type_id = $this->request->input('type_id');
-    	$name = $this->request->input('name');
-    	$description = $this->request->input('description');
-        $account_type = $this->request->input('account_type');
+            case 'cancel':
+                return redirect('/type');
+            break;
+        }
+
         
-        $data = [
-            'name' => $name, 
-            'description' => $description,
-            'account_type' =>$account_type,
-            'updated_at' => date('Y-m-d H:i:s')
-        ];
-    
-    if($type_id == 0) {
-        $data['created_at'] = date('Y-m-d H:i:s');
-        \DB::table('types')->insert($data);
-        $message = "Record added successfully.";
-    }
-    else {
-        \DB::table('types')
-        ->where('id', $type_id)
-        ->update($data);
-        $message = "Record updated successfully.";
-        //  return($type_id);
-    }
-         return redirect('/type')->with('success','Record Added');
     }
 
     public function delete($id){
