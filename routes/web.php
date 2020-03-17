@@ -26,6 +26,8 @@ Route::get('/type/edit/{id?}','TypeController@edit');
 Route::get('/type/delete/{id?}','TypeController@delete');
 Route::POST('/type/save','TypeController@save');
 
+Route::get('/companies','CompanyController@index');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
