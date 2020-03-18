@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 @section('content-header')
-<h2>Ledger </h2>
+<h2>Account Types </h2>
 @endsection
 @section('content')
 <div class="add-button">
@@ -30,26 +30,7 @@
                     <th>Action</th>
                 </thead>
 
-                {{-- <!-- Table Body -->
-                <tbody>
-                    @if (count($companies) > 0)
-                        @foreach ($companies as $company)
-                            <tr>
-                                <td><a href="{{ url('records/' . $company->id .'/'.$current_fiscal_year->id ) }}">{{ $company->company_name }}</a></td>
-                                <td>{{ $company->company_address }}</td>
-                                <td>{{ $company->company_phone_number }}</td>
-                                <td style="text-align: right;"></td>
-                                <td><a href="{{ url('records/' . $company->id .'/'.$current_fiscal_year->id ) }}"><i class="fa fa-eye" style="text-align: center;"></i></a></td>
-                                <td>
-                                    <a href="{{ url('admin/companies/edit') }}/{{ $company->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
-                                    <a href="{{ url('admin/companies/delete') }}/{{ $company->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr><td colspan="6">No records found</td></tr>
-                    @endif
-                </tbody> --}}
+                
             </table>
         </div>
     </div>
