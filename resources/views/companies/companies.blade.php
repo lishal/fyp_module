@@ -30,7 +30,26 @@
                     <th>Action</th>
                 </thead>
 
-                
+                <!-- Table Body -->
+                <tbody>
+                    @if (count($companies) > 0)
+                        @foreach ($companies as $company)
+                            <tr>
+                                <td>{{ $company->company_name }}</td>
+                                <td>{{ $company->company_address }}</td>
+                                <td>{{ $company->company_phone_number }}</td>
+                                <td style="text-align: right;"><?php echo number_format($company->yearly_record_balance, 2) ?></td>
+                                <td><i class="fa fa-eye" style="text-align: center;"></i></td>
+                                <td>
+                                    <a href="{{ url('#') }}/{{ $company->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
+                                    <a href="{{ url('#') }}/{{ $company->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr><td colspan="6">No records found</td></tr>
+                    @endif
+                </tbody>
             </table>
         </div>
     </div>
