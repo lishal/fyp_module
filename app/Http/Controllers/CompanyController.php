@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\company;
 use App\Type;
-
+use App\User;
 class CompanyController extends Controller
 {
     protected $company;
@@ -55,8 +55,20 @@ class CompanyController extends Controller
     }
     public function edit($companyId=0)
     {
+        $company = new Company();
         
+        $types = Type::all();
+        $users = User::all();
 
-        return view('companies.add_companies');
+        if($companyId > 0) {
+            $company = $company->where('id', $companyId)->first();
+        }
+
+        return view('companies.add_companies', ['company' => $company, 'types' => $types, 'users' => $users]);
     }
+
+   
+
+    
+
 }

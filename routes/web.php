@@ -28,6 +28,8 @@ Route::POST('/type/save','TypeController@save');
 
 Route::get('/companies','CompanyController@index');
 Route::get('/companies/edit','CompanyController@edit');
+Route::post('/companies/save', 'CompanyController@save');
+
 
 
 
