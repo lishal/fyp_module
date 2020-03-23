@@ -32,8 +32,6 @@ class CompanyController extends Controller
 
     if($this->request->input('company_types')){
 
-            $company_type_option = $this->request->input('company_types');
-            
             
 
             $companies = DB::table('companies')
@@ -48,13 +46,17 @@ class CompanyController extends Controller
         }else {
 	  	    $companies = $this->company->getAll();
 
-            
 
-            
         }
          
+        $types     = Type::all();
+
+	    return view('companies.companies', ['companies' => $companies,'types'=>$types]);
+    }
+    public function edit($companyId=0)
+    {
         
 
-	    return view('companies.companies', ['companies' => $companies]);
-	}
+        return view('companies.add_companies');
+    }
 }

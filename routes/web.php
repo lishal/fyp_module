@@ -27,6 +27,7 @@ Route::get('/type/delete/{id?}','TypeController@delete');
 Route::POST('/type/save','TypeController@save');
 
 Route::get('/companies','CompanyController@index');
+Route::get('/companies/edit','CompanyController@edit');
 
 
 
