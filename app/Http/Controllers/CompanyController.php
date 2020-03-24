@@ -69,6 +69,6 @@ class CompanyController extends Controller
 
    
 
-    
+   
 
 }
