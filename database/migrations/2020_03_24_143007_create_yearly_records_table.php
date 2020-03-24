@@ -14,7 +14,13 @@ class CreateYearlyRecordsTable extends Migration
     public function up()
     {
         Schema::create('yearly_records', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('yearly_record_id');
+            $table->integer('company_id')->unsigned();
+            $table->foreign('company_id')
+              ->references('id')->on('companies')
+              ->onDelete('cascade');
+            $table->enum('yearly_record_status', ['dr', 'cr']);
+            $table->double('yearly_record_balance');
             $table->timestamps();
         });
     }
