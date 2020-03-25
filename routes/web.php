@@ -30,7 +30,7 @@ Route::get('/companies','CompanyController@index');
 Route::get('/companies/edit','CompanyController@edit');
 Route::post('/companies/save', 'CompanyController@save');
 
-
+Route::get('/Settings/fiscalyears','SettingsController@fiscalyears');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

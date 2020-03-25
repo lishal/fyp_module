@@ -46,7 +46,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('/admin/settings/fiscalyears') }}">Fiscal Years</a></li>
+            <li><a href="{{ url('/Settings/fiscalyears') }}">Fiscal Years</a></li>
           </ul>
         </li>
       @endif
