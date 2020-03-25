@@ -9,4 +9,8 @@ class SettingsController extends Controller
     public function fiscalyears(Request $request){
         return view ('Settings.fiscalyears');
     }
+
+    public function edit(Request $request){
+        return view ('Settings.fiscalyearedit');
+    }
 }
