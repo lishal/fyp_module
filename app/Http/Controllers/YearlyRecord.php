@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
-class YearlyRecord extends Controller
+class YearlyRecord extends Model
 {
-    //
+    public $primaryKey = 'yearly_record_id';
 }
