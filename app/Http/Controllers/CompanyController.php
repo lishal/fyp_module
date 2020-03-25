@@ -35,6 +35,7 @@ class CompanyController extends Controller
             
 
             $companies = DB::table('companies')
+                            
                             ->selectRaw('*')
                             ->rightJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
                             ->where('companies.company_type_id', (int)$this->request->input('company_types'))
@@ -72,7 +73,7 @@ class CompanyController extends Controller
     public function save(Request $request)
     {
     switch ($request->input('action')) {
-        case save:
+        case 'save':
             $company_id = $this->request->input('company_id');
 
             $rules = [
