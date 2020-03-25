@@ -14,7 +14,11 @@ class CreateFiscalYearsTable extends Migration
     public function up()
     {
         Schema::create('fiscal_years', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('fiscal_year_name', 100);
+            $table->date('fiscal_year_start_date_ad');
+            $table->date('fiscal_year_end_date_ad');
+            $table->enum('current_fiscal_year',['0', '1'])->default('1');
             $table->timestamps();
         });
     }
