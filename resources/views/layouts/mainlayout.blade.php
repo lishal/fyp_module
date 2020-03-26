@@ -38,7 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Bootstrap 3.3.7 -->
   <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ url('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
-  <script src="{{ url('js/mainlayout.js') }}"></script>
+  <script src="{{ url('js/main.js') }}"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -66,6 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Footer -->
   @include('admin/footer')
+</div>
 
   @yield('scripts')
 

@@ -55,7 +55,7 @@
     </div>
 </div>
 @endsection
-<script>
+{{-- <script>
     function confirmDelete() {
         if(confirm('Are you sure to delete this item?') == true) {
             return true;
@@ -64,4 +64,4 @@
             return false;
         }
     }
-</script>
+</script> --}}
