@@ -22,6 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ url("bower_components/admin-lte/dist/css/skins/skin-blue.min.css") }}">
 
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -33,12 +34,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+  <!-- Date picker -->
+  <link rel="stylesheet" href="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.css') }}">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+
+  
+
   <!-- jQuery 3 -->
+  
   <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ url('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
   <script src="{{ url('js/main.js') }}"></script>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -68,7 +79,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @include('admin/footer')
 </div>
 
+<script src="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.js') }}"></script>
+
   @yield('scripts')
+  
 
 </body>
 </html>
