@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Http\Controllers\FiscalYear;
 class SettingsController extends Controller
 {
     protected $request;
@@ -15,7 +16,9 @@ class SettingsController extends Controller
     }
 
     public function fiscalyears(Request $request){
-        return view ('Settings.fiscalyears');
+        $fiscalYears     = FiscalYear::all();
+
+        return view ('Settings.fiscalyears', ['fiscalYears' => $fiscalYears]);
     }
 
     public function edit(Request $request){
