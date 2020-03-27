@@ -16,7 +16,23 @@
         <div class="panel-heading">
             Fiscal Year
         </div>
+        <div class="panel-body">
+            <table id="years" class="table table-striped deals-table">
+    
+                <!-- Table Headings -->
+                <thead>
+                    <th>Name</th>
+                    <th>Start Date in AD</th>
+                    <th>End Date in AD</th>
+                    <th>Is Current Year</th>
+                    <th>Action</th>
+                </thead>
+                <!-- Table Body -->
+                <tbody>
+                    <tr><td colspan="5">No records found</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 @endsection
