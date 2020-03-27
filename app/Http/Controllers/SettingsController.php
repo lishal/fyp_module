@@ -38,14 +38,16 @@ class SettingsController extends Controller
     	$fiscal_year_name             = $this->request->input('fiscal_year_name');
         $fiscal_year_start_date_ad    = $this->request->input('fiscal_year_start_date_ad');
     	$fiscal_year_end_date_ad      = $this->request->input('fiscal_year_end_date_ad');
-        
+        $nepali_year_start_date_bs    = $this->request->input('nepali_year_start_date_bs');
+        $nepali_year_end_date_bs      = $this->request->input('nepali_year_end_date_bs');
     	$current_fiscal_year          = $this->request->input('current_fiscal_year');
 
         $data = [
                 'fiscal_year_name'   => $fiscal_year_name, 
                 'fiscal_year_start_date_ad' => date('Y-m-d', strtotime($fiscal_year_start_date_ad)),
                 'fiscal_year_end_date_ad' => date('Y-m-d', strtotime($fiscal_year_end_date_ad)),
-                
+                'nepali_year_start_date_bs' =>  date('Y-m-d', strtotime($nepali_year_start_date_bs)),
+                'nepali_year_end_date_bs' =>  date('Y-m-d', strtotime($nepali_year_end_date_bs)), 
                 'current_fiscal_year' => $current_fiscal_year,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
