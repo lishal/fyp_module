@@ -32,6 +32,7 @@ Route::post('/companies/save', 'CompanyController@save');
 
 Route::get('/Settings/fiscalyears','SettingsController@fiscalyears');
 Route::get('/settings/fiscalyear/edit','SettingsController@edit');
+Route::post('/settings/fiscalyear/save', 'SettingsController@fiscalyearsave');
 
 
 

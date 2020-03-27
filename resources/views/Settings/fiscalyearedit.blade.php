@@ -61,8 +61,8 @@
                         <label class="col-md-2 control-label">Is Current Fiscal Year?*</label>
 
                         <div class="col-md-7">
-                            <input type="radio" name="current_fiscal_year" > Yes
-                            <input type="radio" name="current_fiscal_year" > No
+                            <input type="radio" name="current_fiscal_year" value="1"> Yes
+                            <input type="radio" name="current_fiscal_year" value="0"> No
 
                         </div>
                     </div>
