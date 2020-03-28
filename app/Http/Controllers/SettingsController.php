@@ -66,4 +66,15 @@ class SettingsController extends Controller
         }
 
     }
+    public function fiscalyeardelete($id)
+    {
+        $fiscalYear = FiscalYear::find($id);
+
+        if($fiscalYear->delete()){
+            return redirect('Settings/fiscalyears')->with('success','Record deleted successfully.');
+        }
+        else{
+            return redirect('Settings/fiscalyears')->with('success','Something went wrong. Please try again.');
+        }
+    }
 }
