@@ -70,7 +70,8 @@
   
                     <div class="form-group bi-form-controls">
                         <div class="col-md-9 text-left">
-                            <button type="submit" class="btn btn-default pull-right">SAVE</button>
+                            <button type="submit" class="btn btn-default pull-right" value="cancel" name="action">CANCEL</button>
+                            <button type="submit" class="btn btn-default pull-right" value="save" name="action" style="margin-right:10px">SAVE </button>
                         </div>
                 </form>
             </div>
