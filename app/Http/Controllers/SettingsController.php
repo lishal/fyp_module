@@ -21,8 +21,12 @@ class SettingsController extends Controller
         return view ('Settings.fiscalyears', ['fiscalYears' => $fiscalYears]);
     }
 
-    public function edit(Request $request){
-        return view ('Settings.fiscalyearedit');
+    public function edit($id=0){
+        $fiscalYear = new FiscalYear();
+        if($id > 0) {
+            $fiscalYear = $fiscalYear->where('id', $id)->first();
+        }
+        return view ('Settings.fiscalyearedit', ['fiscalYear' => $fiscalYear]);
     }
     
     public function fiscalyearsave(Request $request){

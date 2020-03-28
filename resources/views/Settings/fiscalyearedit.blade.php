@@ -17,7 +17,7 @@
                         <label class="col-md-2 control-label">Name*</label>
 
                         <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Fiscal Year Name" name="fiscal_year_name" >
+                            <input type="text" class="form-control" placeholder="Fiscal Year Name" name="fiscal_year_name" value="{{ old('fiscal_year_name')? old('fiscal_year_name'): ($fiscalYear->fiscal_year_name? $fiscalYear->fiscal_year_name: '') }}" >
                         </div>
                     </div>
 
@@ -25,7 +25,7 @@
                         <label class="col-md-2 control-label">Start Date (in BS)*</label>
 
                         <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Fiscal Year Start Date (in BS)" id="nepali_year_start_date_bs" name="nepali_year_start_date_bs" readonly >
+                            <input type="text" class="form-control" placeholder="Fiscal Year Start Date (in BS)" id="nepali_year_start_date_bs" name="nepali_year_start_date_bs" value="{{ old('nepali_year_start_date_bs')? old('nepali_year_start_date_bs'): ($fiscalYear->nepali_year_start_date_bs? $fiscalYear->nepali_year_start_date_bs: '') }}"readonly >
 
                     
                         </div>
@@ -34,7 +34,7 @@
                         <label class="col-md-2 control-label">Start Date (in AD)*</label>
 
                         <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Fiscal Year Start Date (in AD)" id="englishDateStart" name="fiscal_year_start_date_ad" readonly >
+                            <input type="text" class="form-control" placeholder="Fiscal Year Start Date (in AD)" id="englishDateStart" name="fiscal_year_start_date_ad" value="{{ old('fiscal_year_start_date_ad')? old('fiscal_year_start_date_ad'): ($fiscalYear->fiscal_year_start_date_ad? $fiscalYear->fiscal_year_start_date_ad: '') }}" readonly >
 
                             
                         </div>
@@ -44,7 +44,7 @@
                         <label class="col-md-2 control-label">End Date (in BS)*</label>
 
                         <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Fiscal Year End Date (in BS)" id="nepali_year_end_date_bs" name="nepali_year_end_date_bs" readonly >
+                            <input type="text" class="form-control" placeholder="Fiscal Year End Date (in BS)" id="nepali_year_end_date_bs" name="nepali_year_end_date_bs" value="{{ old('nepali_year_end_date_bs')? old('nepali_year_end_date_bs'): ($fiscalYear->nepali_year_end_date_bs? $fiscalYear->nepali_year_end_date_bs: '') }}"  readonly >
 
                            
                         </div>
@@ -53,7 +53,7 @@
                         <label class="col-md-2 control-label">End Date (in AD)*</label>
 
                         <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Fiscal Year End Date (in AD)" id="englishDateEnd" name="fiscal_year_end_date_ad" readonly>
+                            <input type="text" class="form-control" placeholder="Fiscal Year End Date (in AD)" id="englishDateEnd" name="fiscal_year_end_date_ad"value="{{ old('fiscal_year_end_date_ad')? old('fiscal_year_end_date_ad'): ($fiscalYear->fiscal_year_end_date_ad? $fiscalYear->fiscal_year_end_date_ad: '') }}"  readonly>
                         </div>
                     </div>
 
@@ -61,8 +61,8 @@
                         <label class="col-md-2 control-label">Is Current Fiscal Year?*</label>
 
                         <div class="col-md-7">
-                            <input type="radio" name="current_fiscal_year" value="1"> Yes
-                            <input type="radio" name="current_fiscal_year" value="0"> No
+                            <input type="radio" name="current_fiscal_year" value="1"  {{ old("current_fiscal_year") == "1"? "checked": ($fiscalYear->current_fiscal_year == "1"? "checked": "") }}> Yes
+                            <input type="radio" name="current_fiscal_year" value="0"  {{ old("current_fiscal_year") === "0"? "checked": ($fiscalYear->current_fiscal_year == 0? "checked": "") }}> No
 
                         </div>
                     </div>
