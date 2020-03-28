@@ -13,8 +13,6 @@ $(document).ready(function(){
 		    npdYearCount: 10,
 		    ndpEnglishInput: 'englishDateEnd'
         });
-
-
 });
 
 

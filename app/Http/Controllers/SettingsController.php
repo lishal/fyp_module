@@ -32,7 +32,7 @@ class SettingsController extends Controller
     public function fiscalyearsave(Request $request){
 
         $id = $this->request->input('id');
-        
+
         $rules = [
         	'fiscal_year_name' => 'required|min:3|max:100',
             'fiscal_year_start_date_ad' => 'required|date',
@@ -58,12 +58,22 @@ class SettingsController extends Controller
                 'current_fiscal_year' => $current_fiscal_year,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
+       
 
-        if($id == 0) {
+        if ($id == 0) {
             $data['created_at'] = date('Y-m-d H:i:s');
-                $id = \DB::table('fiscal_years')->insert($data);
-            return redirect('Settings/fiscalyears')->with('success','Fiscal Year  successfully added.');
+            $id = \DB::table('fiscal_years')->insertGetId($data);
+            $message = "Record added successfully.";
+
         }
+        else {
+        	\DB::table('fiscal_years')
+            ->where('id', $id)
+            ->update($data);
+            $message = "Record updated successfully.";
+        }
+
+        return redirect('Settings/fiscalyears')->with('success',$message);
 
     }
     public function fiscalyeardelete($id)
@@ -77,4 +87,6 @@ class SettingsController extends Controller
             return redirect('Settings/fiscalyears')->with('success','Something went wrong. Please try again.');
         }
     }
+    
+
 }

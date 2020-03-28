@@ -11,8 +11,9 @@
             </div>
             <div class="panel-body">
                 @include('validation.messages')
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/fiscalyear/save') }}" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/Settings/fiscalyear/save') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" id="id" value="{{ $fiscalYear->id or '0' }}">
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name*</label>
 
