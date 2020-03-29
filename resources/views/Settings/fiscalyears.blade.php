@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="add-button">
-    <a href="{{ url('/Settings/fiscalyear/edit') }}" class="btn btn-primary">Add Fiscal Year</a>
+    <a href="{{ url('Settings/fiscalyear/edit') }}" class="btn btn-primary">Add Fiscal Year</a>
 </div>
         
 <div class="panel-body">

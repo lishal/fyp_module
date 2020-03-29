@@ -38,6 +38,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.css') }}">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
+ 
+
+
 
   
 
@@ -79,9 +82,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @include('admin/footer')
 </div>
 
+<script src="{{url('bower_components/admin-lte/dist/js/adminlte.min.js')}}"></script>
 <script src="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.js') }}"></script>
-
   @yield('scripts')
+ 
+  
   
 
 </body>

@@ -31,8 +31,8 @@ Route::get('/companies/edit','CompanyController@edit');
 Route::post('/companies/save', 'CompanyController@save');
 
 Route::get('/Settings/fiscalyears','SettingsController@fiscalyears');
-Route::get('/Settings/fiscalyear/edit/{id?}','SettingsController@edit');
-Route::post('/Settings/fiscalyear/save', 'SettingsController@fiscalyearsave');
+Route::get('Settings/fiscalyear/edit/{id?}','SettingsController@fiscalyearedit');
+Route::post('Settings/fiscalyear/save', 'SettingsController@fiscalyearsave');
 Route::get('Settings/fiscalyear/delete/{id}', 'SettingsController@fiscalyeardelete');
 
 
