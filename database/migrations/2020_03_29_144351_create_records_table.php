@@ -14,7 +14,13 @@ class CreateRecordsTable extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('record_id');
+            $table->string('record_particular');
+            $table->string('record_CBF')->nullable();
+            $table->double('record_debit');
+            $table->double('record_credit');
+            $table->string('company_id');
+            $table->enum('record_status',['0', '1']);
             $table->timestamps();
         });
     }
