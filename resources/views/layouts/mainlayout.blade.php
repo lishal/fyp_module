@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <!-- Date picker -->
-  <link rel="stylesheet" href="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.css') }}">
+  <link rel="stylesheet" href="{{ url('css/jDatepicker.css') }}">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
  
@@ -82,8 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @include('admin/footer')
 </div>
 
-<script src="{{url('bower_components/admin-lte/dist/js/adminlte.min.js')}}"></script>
-<script src="{{ url('bower_components/nepalidatepicker/nepali.datepicker.v2.2.min.js') }}"></script>
+<script src="{{ url('js/jDatepicker.js') }}"></script>
   @yield('scripts')
  
   

@@ -21,6 +21,7 @@ class CreateYearlyRecordsTable extends Migration
               ->onDelete('cascade');
             $table->enum('yearly_record_status', ['dr', 'cr']);
             $table->double('yearly_record_balance');
+            $table->integer('fiscal_year_id');
             $table->timestamps();
         });
     }
