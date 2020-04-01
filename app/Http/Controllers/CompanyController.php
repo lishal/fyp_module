@@ -30,32 +30,22 @@ class CompanyController extends Controller
 	{
 
 
-    // $current_fiscal_year    = FiscalYear::where('current_fiscal_year', '1')->first();
+    $current_fiscal_year    = FiscalYear::where('current_fiscal_year', '1')->first();
 
 
-    if($this->request->input('company_types')){
-
-            
-
-            $companies = DB::table('companies')
-                            
+              $companies = $this->company->getAll();
+               $companies = DB::table('companies')
                             ->selectRaw('*')
-                            ->rightJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
-                            ->where('companies.company_type_id', (int)$this->request->input('company_types'))
+                            ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
                             ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
                             ->get()->toArray();
-                                        
 
 
-        }else {
-	  	    $companies = $this->company->getAll();
-
-
-        }
+        
          
         $types     = Type::all();
 
-	    return view('companies.companies', ['companies' => $companies,'types'=>$types]);
+	    return view('companies.companies', ['companies' => $companies,'types'=>$types,'current_fiscal_year'=>$current_fiscal_year]);
     }
     public function edit($companyId=0)
     {
@@ -98,7 +88,7 @@ class CompanyController extends Controller
             $company_owner      = $this->request->input('owner');
             $company_phone_number    = $this->request->input('phone_number');
             $company_email           = $this->request->input('email_address');
-
+            // $company_vat_number      = $this->request->input('company_vat_number');
             $subscription_start_date = $this->request->input('subscription_start_on');
             $subscription_end_date   = $this->request->input('subscription_end_on');
             $balance                 = $this->request->input('balance');
@@ -108,11 +98,13 @@ class CompanyController extends Controller
             $data = [
                     'company_type_id'   => $company_type, 
                     'company_name'      => $company_name,
+                    // 'company_logo'      => $logo_name,
                     'company_address'   => $company_address,
                     'company_owner'     => $company_owner,
                     'company_phone_number' => $company_phone_number,
                     'company_email'        => $company_email,
                     'company_user_id'      => $company_user_id,
+                    // 'company_vat_number'   => $company_vat_number,
                     'subscription_start_date'   => date('Y-m-d', strtotime($subscription_start_date)),
                     'subscription_end_date'     => date('Y-m-d', strtotime($subscription_end_date)),
                     'status'                    => $status,
@@ -163,7 +155,12 @@ class CompanyController extends Controller
                     
                 }
             }
-
+            else {
+                \DB::table('companies')
+                ->where('id', $company_id)
+                ->update($data);
+                $message = "Record updated successfully.";
+            }
             // return ($active_fiscal_year);
                 return redirect('/companies')->with('success',$message);
             break;
