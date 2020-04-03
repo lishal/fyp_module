@@ -13,7 +13,7 @@
                 @include('validation.messages')
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/companies/save') }}" enctype="multipart/form-data">
                     @csrf
-                    {{-- <input type="hidden" name="company_id" id="company_id" value="{{ $company->id or '0' }}"> --}}
+                    <input type="hidden" name="company_id" id="company_id" value="{{ $company->id }}">
                     
                     <div class="form-group">
                         <label class="col-md-2 control-label">Company Name*</label>
@@ -94,15 +94,17 @@
 
                         </div>
                     </div>
+                    
+                    @if($company->id == 0)
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Balance*</label>
 
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Balance*</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" placeholder="Balance" name="balance" value="{{ old('balance')? old('balance'): ($company->balance? $company->balance: '') }}">
 
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Balance" name="balance" value="{{ old('balance')? old('balance'): ($company->balance? $company->balance: '') }}">
-
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">Status*</label>

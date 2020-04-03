@@ -51,6 +51,7 @@ class CompanyController extends Controller
     {
         $company = new Company();
         
+        
         $types = Type::all();
         $users = User::all();
 
@@ -98,7 +99,6 @@ class CompanyController extends Controller
             $data = [
                     'company_type_id'   => $company_type, 
                     'company_name'      => $company_name,
-                    // 'company_logo'      => $logo_name,
                     'company_address'   => $company_address,
                     'company_owner'     => $company_owner,
                     'company_phone_number' => $company_phone_number,
@@ -156,13 +156,15 @@ class CompanyController extends Controller
                 }
             }
             else {
+            
                 \DB::table('companies')
                 ->where('id', $company_id)
                 ->update($data);
                 $message = "Record updated successfully.";
+                
             }
             // return ($active_fiscal_year);
-                return redirect('/companies')->with('success',$message);
+                 return redirect('/companies')->with('success',$message);
             break;
     
             case 'cancel':
