@@ -36,6 +36,7 @@ Route::get('Settings/fiscalyear/edit/{id?}','SettingsController@fiscalyearedit')
 Route::post('Settings/fiscalyear/save', 'SettingsController@fiscalyearsave');
 Route::get('Settings/fiscalyear/delete/{id}', 'SettingsController@fiscalyeardelete');
 
+Route::get('/records', 'RecordsController@show');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
