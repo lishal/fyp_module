@@ -171,4 +171,17 @@ class CompanyController extends Controller
         }
 
     }
+    public function delete($id)
+    {
+        $company = Company::find($id);
+
+        if($company->delete()){
+            $message = "Company deleted successfully.";
+            return redirect('companies')->with('success',$message);
+        }
+        else{
+            $message ="Something went wrong. Please try again.";
+            return redirect('companies')->with('success',$message);
+        }
+    }
 }

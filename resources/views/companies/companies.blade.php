@@ -41,8 +41,8 @@
                                 <td><?php echo number_format($company->yearly_record_balance, 2) ?></td>
                                 <td><a href="{{ url('#')}}"><i class="fa fa-eye" style="text-align: center;"></i></a></td>
                                 <td>
-                                    <a href="{{ url('#') }}/{{ $company->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
-                                    <a href="{{ url('#') }}/{{ $company->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
+                                    <a href="{{ url('') }}/{{ $company->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
+                                    <a href="{{ url('companies/delete') }}/{{ $company->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
                                 </td>
                             </tr>
                         @endforeach
