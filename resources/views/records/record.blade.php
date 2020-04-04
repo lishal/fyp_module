@@ -37,6 +37,11 @@
                                     <h3 style="text-align: center">{{$company->company_name}} </h3>
                                     <div class="filter">
                                         <label for="fiscal_year">Fiscal Years: </label>
+                                        <select id="fiscal_year" name="fiscal_year">
+                                            @foreach($fiscalYears as $year)
+                                                <option value="{{ $year->id }}"@if($year->id == $current_fiscal_year->id) {{'selected'}} @endif>{{ $year->fiscal_year_name }}</option>
+                                            @endforeach	
+                                        </select>
                                     </div>
                                 </div>
                                 <table class="table table-striped" id="recordsTable">
