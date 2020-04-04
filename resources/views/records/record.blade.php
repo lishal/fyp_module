@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-sm-9">			
                                 <div class="row">
-                                    <h3 style="text-align: center">abc </h3>
+                                    <h3 style="text-align: center">{{$company->company_name}} </h3>
                                     <div class="filter">
                                         <label for="fiscal_year">Fiscal Years: </label>
                                     </div>
