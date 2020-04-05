@@ -60,12 +60,22 @@ class SettingsController extends Controller
                         'current_fiscal_year' => $current_fiscal_year,
                         'updated_at' => date('Y-m-d H:i:s')
                     ];
+
+                 $active_fiscal_year     = DB::table('fiscal_years')->where('current_fiscal_year', '1')->first(); 
+
+            if(!$active_fiscal_year){
+                break;
+            }
             
 
                 if ($id == 0) {
                     $data['created_at'] = date('Y-m-d H:i:s');
                     $id=\DB::table('fiscal_years')->insert($data);
                     $message = "Record added successfully.";
+
+                    \DB::table('fiscal_years')
+                    ->where('id', $active_fiscal_year->id)
+                    ->update(['current_fiscal_year'=>'0']);
 
                 }
                 else {
