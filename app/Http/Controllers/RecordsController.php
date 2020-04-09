@@ -30,11 +30,25 @@ class RecordsController extends Controller
         $current_year_records = Record::where('company_id', $company_id)
         ->whereBetween('record_english_date', [$current_fiscal_year->fiscal_year_start_date_ad, $current_fiscal_year->fiscal_year_end_date_ad])->get()->toArray();
 
-        return view('records.record',['company' => $company,'fiscalYears'=> $fiscalYears,'current_fiscal_year'=>$current_fiscal_year, 'records'=>$current_year_records]);
+        return view('records.record',['company' => $company,'fiscalYears'=> $fiscalYears,'current_fiscal_year'=>$current_fiscal_year, 'records'=>$current_year_records,'company_id'=>$company_id]);
     }
-    public function store(){
+    public function store(Request $request){
 
-       
+        $active_fiscal_year         = FiscalYear::where('current_fiscal_year', '1')->first(); 
+        $records = $request->input();
+        $record = new Record();
+        $record->record_particular  = $records['record_particulars'];
+        $record->record_CBF         = $records['record_CBF'];
+        $record->record_debit       = $records['record_debit'];
+        $record->record_credit      = $records['record_credit'];
+        $record->record_status      = '1';
+        $record->company_id         = $records['company_id'];
+        $record->record_created_date= $records['record_date'];
+        $record->record_english_date= $records['record_english_date'];
+        $record->fiscal_year_id     = $active_fiscal_year->id;
+        $record->save();
+        
+        return response()->json(array('success' => true, 'last_insert_id' => $record->record_id), 200);
 
     }
 }

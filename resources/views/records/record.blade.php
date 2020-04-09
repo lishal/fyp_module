@@ -81,6 +81,7 @@
     </div>
 @endsection
 <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#add_li").click(function (){
@@ -97,8 +98,27 @@
 		    	alert('Enter all the data');
 		    }	    		
         });
+        
     });
-   
+    function storeAjaxRecords(func, record_date, record_particulars, record_debit, record_credit, record_CBF,record_english_date){
+        $.ajax({
+            headers: {
+		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		    type: "POST",
+            url: '../store',
+            data: ({ company_id:<?php echo $company_id ?>, record_date: record_date, record_particulars:record_particulars, record_debit: record_debit, record_credit: record_credit, record_CBF: record_CBF,record_english_date : record_english_date }),
+	        success: function(data) {
+                $("table tr:last").before(
+	            	"<tr><td class='created_at'>" + record_date + 
+		    		"</td><td class='particulars'>" + record_particulars + 
+		    		"</td><td class='cbf'>" + record_CBF + 
+		    		"</td><td id='debit'>" + record_debit + 
+		    		"</td><td class='credit'>" +  record_credit + 
+		    		"</td><td class='balance' style='text-align:right;font-weight: bold; '>");
+	            location.reload();
+            }
+        });
+    }
             
     
 </script>
