@@ -56,7 +56,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <th colspan="6">No Record Found</th>
+                                        @for($i=0; $i < sizeof($records); $i++)
+                                            <tr>
+                                                @php
+                                                    $timestamp = strtotime($records[$i]['record_english_date']);
+                                                    $created_at = date('Y-m-d ', $timestamp);
+                                                @endphp
+                                                <td class='created_at'>{{ $created_at }}</td>
+                                                <td class='particulars'>{{ $records[$i]['record_particular'] }}</td>
+                                                <td class='cbf'>{{ $records[$i]['record_CBF'] }}</td>		 	
+                                                <td class='debit'style="text-align: right;">{{ $records[$i]['record_debit'] }}</td>
+                                                <td class='credit'style="text-align: right;">{{ $records[$i]['record_credit'] }}</td>
+                                                <td class='balance' style="text-align: right; font-weight: bold; "></td>
+                                            </tr>
+                                            @endfor
                                     </tbody>
                                 </table>
                             </div>
@@ -85,14 +98,7 @@
 		    }	    		
         });
     });
-    function storeAjaxRecords(func, record_date, record_particulars, record_debit, record_credit, record_CBF,record_english_date) {
-		$.ajax({
-			headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		    type: "POST",
-            url: '../store'
-         });
-    }
+   
             
     
 </script>
