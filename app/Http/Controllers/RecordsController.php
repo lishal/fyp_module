@@ -17,4 +17,7 @@ class RecordsController extends Controller
 
         return view('records.record',['company' => $company,'fiscalYears'=> $fiscalYears,'current_fiscal_year'=>$current_fiscal_year]);
     }
+    public function store(){
+        
+    }
 }

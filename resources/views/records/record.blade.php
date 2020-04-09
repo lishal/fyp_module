@@ -85,6 +85,15 @@
 		    }	    		
         });
     });
+    function storeAjaxRecords(func, record_date, record_particulars, record_debit, record_credit, record_CBF,record_english_date) {
+		$.ajax({
+			headers: {
+		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		    type: "POST",
+            url: '../store'
+         });
+    }
+            
     
 </script>
 <style type="text/css">
@@ -101,3 +110,4 @@
     }
 
 </style>
+
