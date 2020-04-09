@@ -13,6 +13,14 @@ $(function(){
 	// 	    npdYearCount: 10,
 	// 	    ndpEnglishInput: 'englishDateEnd'
 	// 	});
+	// $('.nepali-calendar').nepaliDatePicker({
+    	
+	// 	npdMonth: true,
+	//     npdYear: true,
+	//     npdYearCount: 10,
+	//     ndpEnglishInput: 'englishDate'
+	// });
+		$('.nepali-calendar').jDatepicker({separator: '-', ADelm: 'englishDate'});
 		$('#nepali_year_start_date_bs').jDatepicker({separator: '-', ADelm: 'englishDateStart'});
 		$('#nepali_year_end_date_bs').jDatepicker({separator: '-', ADelm: 'englishDateEnd'});
 		

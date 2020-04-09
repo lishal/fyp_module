@@ -70,7 +70,6 @@ class SettingsController extends Controller
                     $message = "Record added successfully.";
 
                     if($active_fiscal_year){
-
                         \DB::table('fiscal_years')
                         ->where('id', $active_fiscal_year->id)
                         ->update(['current_fiscal_year'=>'0']);

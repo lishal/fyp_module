@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\type;
+use App\Type;
 use Illuminate\Http\Request;
 use App\Repositories\TypeRepository;
 use Illuminate\Http\RedirectResponse;

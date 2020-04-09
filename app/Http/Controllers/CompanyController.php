@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\company;
+use App\Company;
 use App\Type;
 use App\User;
 use App\YearlyRecord;

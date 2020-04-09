@@ -67,6 +67,26 @@
         </div>
     </div>
 @endsection
+<script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#add_li").click(function (){
+            var record_date, record_particulars, record_debit, record_credit;
+	    	record_date 		= $('#nepaliDate').val();
+	    	record_english_date = $('#englishDate').val();
+	    	record_particulars  = $('#record_particulars').val();
+	    	record_CBF			= $('#record_CBF').val();
+	    	record_credit 		= ($('#record_credit').val() == '') ? 0 : $('#record_credit').val();
+	    	record_debit 		= ($('#record_debit').val() == '') ? 0 : $('#record_debit').val();
+		    if(record_credit >= 0 && record_debit >= 0 && record_particulars != '' && record_date != ''){
+			    storeAjaxRecords(this, record_date, record_particulars, record_debit, record_credit, record_CBF,record_english_date);
+		    } else {
+		    	alert('Enter all the data');
+		    }	    		
+        });
+    });
+    
+</script>
 <style type="text/css">
 	label {
 	  display: inline-block;
