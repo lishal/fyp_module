@@ -55,7 +55,8 @@
                                             <th style="text-align: right;">Balance</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    
+                                    <tbody  id="testing">
                                         @for($i=0; $i < sizeof($records); $i++)
                                             <tr>
                                                 @php
@@ -70,6 +71,14 @@
                                                 <td class='balance' style="text-align: right; font-weight: bold; "></td>
                                             </tr>
                                             @endfor
+                                            <tr>
+                                                <td></td>
+                                                 <td></td>
+                                                 <td></td>		 	
+                                                 <td id='total_debit' style="font-weight: bold; font-size: 18px;text-align: right;"></td>
+                                                 <td id='total_credit' style="font-weight: bold; font-size: 18px;text-align: right;"></td>
+                                                 <td id='total' style="text-align: right; font-weight: bold; font-size: 18px"></td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -84,6 +93,9 @@
 <script src="{{ url('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+
+        findTotal();
+
         $("#add_li").click(function (){
             var record_date, record_particulars, record_debit, record_credit;
 	    	record_date 		= $('#nepaliDate').val();
@@ -119,6 +131,27 @@
             }
         });
     }
+    function findTotal() {
+		total = 0;
+		total_credit = 0;
+		total_debit = 0;
+		
+		$("#testing").find("tr").each(function() {
+			
+			if(($(this).find("td.debit").text())){	
+				
+				if(($(this).prev().length) == 0){
+				    total = parseFloat($(this).find("td.debit").text()) - parseFloat($(this).find("td.credit").text());
+				   
+				}else{
+				    total = parseFloat($(this).find("td.debit").text()) - parseFloat($(this).find("td.credit").text()) + parseFloat($(this).prev().find("td.balance").text());
+				}
+				$(this).find("td.balance").text(total.toFixed(2));				
+			}
+		});
+        
+    }
+    
             
     
 </script>

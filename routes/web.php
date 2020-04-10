@@ -40,5 +40,6 @@ Route::get('/records/{id}/{fiscalyearId}', 'RecordsController@show');
 Route::post('records/store', 'RecordsController@store');
 
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 

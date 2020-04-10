@@ -48,7 +48,9 @@ class RecordsController extends Controller
         $record->fiscal_year_id     = $active_fiscal_year->id;
         $record->save();
         
-        return response()->json(array('success' => true, 'last_insert_id' => $record->record_id), 200);
+        return response()->json(array('success' => true), 200);
 
     }
+   
+    
 }
