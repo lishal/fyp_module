@@ -51,6 +51,6 @@ class RecordsController extends Controller
         return response()->json(array('success' => true), 200);
 
     }
-   
+    
     
 }

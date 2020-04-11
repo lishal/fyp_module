@@ -39,7 +39,7 @@
       @endif
 
       @if(\Auth::user()->id == '1')
-        <li class="treeview @if(Request::is('*/settings*')) {{ 'active' }} @endif">
+        <li class="treeview @if(Request::is('Settings/fiscalyears')) {{ 'active' }} @endif">
           <a href="{{ url('/admin/settings') }}"><i class="fa fa-link"></i><span>Settings</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

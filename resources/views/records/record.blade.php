@@ -149,7 +149,17 @@
 				$(this).find("td.balance").text(total.toFixed(2));				
 			}
 		});
-        
+        $("#testing").find("tr").each(function(){
+			if(($(this).find("td.debit").text())){
+				total_debit = total_debit + parseFloat($(this).find("td.debit").text()); 
+				total_credit = total_credit + parseFloat($(this).find("td.credit").text()); 
+                $("#total").text(total.toFixed(2));
+				$("#total_credit").text(total_credit.toFixed(2));		        	
+				$("#total_debit").text(total_debit.toFixed(2));	
+               
+			}
+		});
+		
     }
     
             
