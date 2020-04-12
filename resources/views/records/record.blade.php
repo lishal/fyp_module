@@ -152,13 +152,21 @@
         $("#testing").find("tr").each(function(){
 			if(($(this).find("td.debit").text())){
 				total_debit = total_debit + parseFloat($(this).find("td.debit").text()); 
-				total_credit = total_credit + parseFloat($(this).find("td.credit").text()); 
+				total_credit = total_credit + parseFloat($(this).find("td.credit").text()); 	
+			}
+		});
+        $.ajax({
+            headers: {
+		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		    type: "POST",
+            url: '../edittotal',
+            data: ({ total: total, total_debit: total_debit, total_credit:total_credit, record_created_date:$("table").last('tr').find('.created_at').text(), company_id:<?php echo $company_id ?>, fiscalyearid:<?php echo $current_fiscal_year->id ?> }),
+	        success: function(data) {
                 $("#total").text(total.toFixed(2));
 				$("#total_credit").text(total_credit.toFixed(2));		        	
 				$("#total_debit").text(total_debit.toFixed(2));	
-               
-			}
-		});
+            }
+        });
 		
     }
     

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\FiscalYear;
+use App\YearlyRecord;
 use App\Record;
 
 class RecordsController extends Controller
@@ -49,6 +50,35 @@ class RecordsController extends Controller
         $record->save();
         
         return response()->json(array('success' => true), 200);
+
+    }
+    public function updateTotal(Request $request)
+    {   
+        
+
+        $records = $request->input();
+        
+            $year = date('Y', strtotime($records['record_created_date']));
+
+            $yearly_record = YearlyRecord::where('fiscal_year_id', '=', $records['fiscalyearid'], 'and')->where('company_id', '=', $records['company_id'])->get()->toArray();
+
+            if(count($yearly_record) == 0){
+                $yearly_record = new YearlyRecord();
+            }else{
+                $yearly_record = YearlyRecord::find($yearly_record[0]['yearly_record_id']);
+            }
+            $yearly_record->fiscal_year_id = $records['fiscalyearid'];
+            $yearly_record->yearly_record_balance = $records['total'];
+            $yearly_record->company_id = $records['company_id'];
+            if($records['total_debit'] >= $records['total_credit']){
+                $yearly_record->yearly_record_status = 'dr';
+            }else{
+                $yearly_record->yearly_record_status = 'cr';
+            }
+            
+            $yearly_record->save();
+            
+        
 
     }
     
