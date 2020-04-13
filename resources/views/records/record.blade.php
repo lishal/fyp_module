@@ -3,6 +3,7 @@
 <h2>Records </h2>
 @endsection
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="panel panel-default panel-default-equal">
@@ -13,24 +14,26 @@
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <div class="container responsive">
                         <div class="row">
-                            <div class="col-sm-3">	
-                                <div class="row">
-                                    <h3 style="text-align:center">Records Transaction</h3>
-                                </div>		
-                                <label>Nepali Date</label>
-                                <input type="text" class= "nepali-calendar" name="record_date" id="nepaliDate" required="true">
-                                <label>English Date</label>
-                                <input type="text" disabled name="record_english_date" id="englishDate">
-                                <label>Particulars</label>
-                                <input type="text" name="record_particulars" id="record_particulars" required="true"><br>
-                                <label>CBF</label>
-                                <input type="text" name="record_CBF" id="record_CBF"><br>
-                                <label>Credit</label>
-                                <input type="number" name="record_credit" id="record_credit" value="" ><br>
-                                <label>Debit</label>
-                                <input type="number" name="record_debit" id="record_debit" value=""><br>			
-                                
-                                <button id="add_li" style="margin-top:10px; height:30px;">Add Record</button>
+                            <div class="col-sm-3">
+                                @if($current_fiscal_year->current_fiscal_year == 1)		
+                                    <div class="row">
+                                        <h3 style="text-align:center">Records Transaction</h3>
+                                    </div>		
+                                    <label>Nepali Date</label>
+                                    <input type="text" class= "nepali-calendar" name="record_date" id="nepaliDate" required="true">
+                                    <label>English Date</label>
+                                    <input type="text" disabled name="record_english_date" id="englishDate">
+                                    <label>Particulars</label>
+                                    <input type="text" name="record_particulars" id="record_particulars" required="true"><br>
+                                    <label>CBF</label>
+                                    <input type="text" name="record_CBF" id="record_CBF"><br>
+                                    <label>Credit</label>
+                                    <input type="number" name="record_credit" id="record_credit" value="" ><br>
+                                    <label>Debit</label>
+                                    <input type="number" name="record_debit" id="record_debit" value=""><br>			
+                                    
+                                    <button id="add_li" style="margin-top:10px; height:30px;">Add Record</button>
+                                @endif
                             </div>
                             <div class="col-sm-9">			
                                 <div class="row">
@@ -38,9 +41,9 @@
                                     <div class="filter">
                                         <label for="fiscal_year">Fiscal Years: </label>
                                         <select id="fiscal_year" name="fiscal_year">
-                                            @foreach($fiscalYears as $year)
-                                                <option value="{{ $year->id }}"@if($year->id == $current_fiscal_year->id) {{'selected'}} @endif>{{ $year->fiscal_year_name }}</option>
-                                            @endforeach	
+                                        @foreach($fiscalYears as $year)
+                                            <option value="{{ $year->id }}"@if($year->id == $current_fiscal_year->id) {{'selected'}} @endif>{{ $year->fiscal_year_name }}</option>
+                                        @endforeach	
                                         </select>
                                     </div>
                                 </div>
@@ -57,7 +60,22 @@
                                     </thead>
                                     
                                     <tbody  id="testing">
-                                        @for($i=0; $i < sizeof($records); $i++)
+                                        @if(!empty($previous_yearly_record))
+                                            <tr>
+                                                
+                                                    <td class='created_at'></td>
+                                                    <td class='particulars'>B/D</td>
+                                                    <td class='cbf'></td>
+                                                    
+
+                                                    <td class='debit' style="text-align: right;">@if($previous_yearly_record->yearly_record_status == "dr"){{$previous_yearly_record->yearly_record_balance}} @else {{0}}@endif</td>
+                                                    <td class='credit' style="text-align: right;">@if($previous_yearly_record->yearly_record_status == "cr"){{abs($previous_yearly_record->yearly_record_balance)}} @else {{0}} @endif</td>
+                                                    <td class='balance' style="text-align: right; font-weight: bold; "></td>
+                                                
+                                                
+                                            </tr>
+                                            @endif
+                                            @for($i=0; $i < sizeof($records); $i++)
                                             <tr>
                                                 @php
                                                     $timestamp = strtotime($records[$i]['record_english_date']);
@@ -83,12 +101,10 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>  
             </div>
         </div>
     </div>
-@endsection
 <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ url('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 <script type="text/javascript">
@@ -169,7 +185,13 @@
         });
 		
     }
-    
+    $('#fiscal_year').on('change', function(){    
+	
+        var company_id = '{{ $company_id }}';
+		var fiscal_year_id = $(this).val();
+		 window.location = "{{url('records')}}/"+company_id+"/"+fiscal_year_id
+		
+	});
             
     
 </script>
@@ -187,4 +209,5 @@
     }
 
 </style>
+@endsection
 

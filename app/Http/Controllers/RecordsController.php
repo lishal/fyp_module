@@ -30,9 +30,22 @@ class RecordsController extends Controller
 
         $current_year_records = Record::where('company_id', $company_id)
         ->whereBetween('record_english_date', [$current_fiscal_year->fiscal_year_start_date_ad, $current_fiscal_year->fiscal_year_end_date_ad])->get()->toArray();
+        
+        $active_fiscal_year     = FiscalYear::where('current_fiscal_year', '1')->first();
+        $previous_yearly_record = YearlyRecord::where('fiscal_year_id', '=', $current_fiscal_year->id-1, 'and')->where('company_id', '=', $company_id)->first();
 
-        return view('records.record',['company' => $company,'fiscalYears'=> $fiscalYears,'current_fiscal_year'=>$current_fiscal_year, 'records'=>$current_year_records,'company_id'=>$company_id]);
+        //return view('records.record',['company' => $company,'fiscalYears'=> $fiscalYears,'current_fiscal_year'=>$current_fiscal_year, 'records'=>$current_year_records,'company_id'=>$company_id]);
+        return  view('records.record', [
+            'company'             => $company,
+            'records'             => $current_year_records,
+            'current_fiscal_year' => $current_fiscal_year, 
+            'fiscalYears'         => $fiscalYears, 
+            'active_fiscal_year'  => $active_fiscal_year, 
+            'company_id'          => $company_id,
+            'previous_yearly_record' => $previous_yearly_record
+        ]);
     }
+
     public function store(Request $request){
 
         $active_fiscal_year         = FiscalYear::where('current_fiscal_year', '1')->first(); 
@@ -54,10 +67,11 @@ class RecordsController extends Controller
     }
     public function updateTotal(Request $request)
     {   
-        
 
+
+        $fiscalYears = FiscalYear::where('current_fiscal_year', '1')->first();
         $records = $request->input();
-        
+        if($fiscalYears->id == $records['fiscalyearid'] ){
             $year = date('Y', strtotime($records['record_created_date']));
 
             $yearly_record = YearlyRecord::where('fiscal_year_id', '=', $records['fiscalyearid'], 'and')->where('company_id', '=', $records['company_id'])->get()->toArray();
@@ -78,7 +92,7 @@ class RecordsController extends Controller
             
             $yearly_record->save();
             
-        
+        }
 
     }
     
