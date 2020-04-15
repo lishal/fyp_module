@@ -50,14 +50,15 @@
                                     <div class="dateselection">
                                         <label for ="select_date">Select Date:</label>
                                         <form method="POST" action="" id="dateSelection">
+                                            @csrf
+                                            <input type="hidden" name="company_id" id="company_id" value="{{ $company->id }}">
                                             <label>From:</label>
-                                            <input type="text" class= "fromDate" name="record_date_from" id="fromDate" required="true">
-                                            <input type="text" disabled name="record_english_date_from" id="englishFromDate" hidden>
+                                            <input type="text" class= "fromDate" name="record_date_from" id="fromDate" required="true" autocomplete="off">
+                                            <input type="text" name="record_english_date_from" id="englishFromDate" hidden>
                                             <label>&emsp;To:</label>
-                                            <input type="text" class= "toDate" name="record_date_to" id="toDate" required="true">
-                                            <input type="text" disabled name="record_english_date_to" id="englishToDate" hidden>
+                                            <input type="text" class= "toDate" name="record_date_to" id="toDate" required="true" autocomplete="off">
+                                            <input type="text" name="record_english_date_to" id="englishToDate" hidden>
                                             <input type="button" class="btn btn-primary" style="width:150px;margin-left:20px;" name="Show" id ="Show" value="Show">
-                                            <a href="{{ url('/records/'. $company->id.'/'.$current_fiscal_year->id)}}" style="width:150px;" class="btn btn-secondary">Clear</a>
                                         </form>
                                 </div>
                                 <br>
@@ -89,20 +90,20 @@
                                                 
                                             </tr>
                                             @endif
-                                            @for($i=0; $i < sizeof($records); $i++)
-                                            <tr>
-                                                @php
-                                                    $timestamp = strtotime($records[$i]['record_english_date']);
-                                                    $created_at = date('Y-m-d ', $timestamp);
-                                                @endphp
-                                                <td class='created_at'>{{ $created_at }}</td>
-                                                <td class='particulars'>{{ $records[$i]['record_particular'] }}</td>
-                                                <td class='cbf'>{{ $records[$i]['record_CBF'] }}</td>		 	
-                                                <td class='debit'style="text-align: right;">{{ $records[$i]['record_debit'] }}</td>
-                                                <td class='credit'style="text-align: right;">{{ $records[$i]['record_credit'] }}</td>
-                                                <td class='balance' style="text-align: right; font-weight: bold; "></td>
-                                            </tr>
-                                            @endfor
+                                                @for($i=0; $i < sizeof($records); $i++)
+                                                <tr>
+                                                    @php
+                                                        $timestamp = strtotime($records[$i]['record_english_date']);
+                                                        $created_at = date('Y-m-d ', $timestamp);
+                                                    @endphp
+                                                    <td class='created_at'>{{ $created_at }}</td>
+                                                    <td class='particulars'>{{ $records[$i]['record_particular'] }}</td>
+                                                    <td class='cbf'>{{ $records[$i]['record_CBF'] }}</td>		 	
+                                                    <td class='debit'style="text-align: right;">{{ $records[$i]['record_debit'] }}</td>
+                                                    <td class='credit'style="text-align: right;">{{ $records[$i]['record_credit'] }}</td>
+                                                    <td class='balance' style="text-align: right; font-weight: bold; "></td>
+                                                </tr>
+                                                @endfor
                                             <tr>
                                                 <td></td>
                                                  <td></td>
@@ -205,7 +206,11 @@
 		var fiscal_year_id = $(this).val();
 		 window.location = "{{url('records')}}/"+company_id+"/"+fiscal_year_id
 		
-	});
+    });
+    $("#Show").on("click", function(e){
+            e.preventDefault();
+            $('#dateSelection').attr('action', "/records/dateselection").submit();
+        });
             
     
 </script>

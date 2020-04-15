@@ -39,6 +39,7 @@ Route::get('Settings/fiscalyear/delete/{id}', 'SettingsController@fiscalyeardele
 Route::get('/records/{id}/{fiscalyearId}', 'RecordsController@show');
 Route::post('records/store', 'RecordsController@store');
 Route::post('records/edittotal', 'RecordsController@updateTotal');
+Route::post('/records/dateselection','RecordsController@display');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
