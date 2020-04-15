@@ -33,11 +33,16 @@ class CompanyController extends Controller
     $current_fiscal_year    = FiscalYear::where('current_fiscal_year', '1')->first();
 
 
-              $companies = $this->company->getAll();
-               $companies = DB::table('companies')
+                // $companies = $this->company->getAll();
+                // $companies = DB::table('companies')
+                //             ->selectRaw('*')
+                //             ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+                //             ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
+                //             ->get()->toArray();
+                $companies = DB::table('companies')
                             ->selectRaw('*')
                             ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
-                            ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
+                           // ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
                             ->get()->toArray();
 
 

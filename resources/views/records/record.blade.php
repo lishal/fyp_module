@@ -46,7 +46,21 @@
                                         @endforeach	
                                         </select>
                                     </div>
+                                    <br>
+                                    <div class="dateselection">
+                                        <label for ="select_date">Select Date:</label>
+                                        <form method="POST" action="" id="dateSelection">
+                                            <label>From:</label>
+                                            <input type="text" class= "fromDate" name="record_date_from" id="fromDate" required="true">
+                                            <input type="text" disabled name="record_english_date_from" id="englishFromDate" hidden>
+                                            <label>&emsp;To:</label>
+                                            <input type="text" class= "toDate" name="record_date_to" id="toDate" required="true">
+                                            <input type="text" disabled name="record_english_date_to" id="englishToDate" hidden>
+                                            <input type="button" class="btn btn-primary" style="width:150px;margin-left:20px;" name="Show" id ="Show" value="Show">
+                                            <a href="{{ url('/records/'. $company->id.'/'.$current_fiscal_year->id)}}" style="width:150px;" class="btn btn-secondary">Clear</a>
+                                        </form>
                                 </div>
+                                <br>
                                 <table class="table table-striped" id="recordsTable">
                                     <thead>
                                         <tr>
@@ -207,6 +221,14 @@
         width: 250px;
         height: 40px;
     }
+    .toDate, .fromDate{
+        width: 150px;
+    }
+    select{
+        width: 150px;
+        height: 40px;
+    }
+
 
 </style>
 @endsection

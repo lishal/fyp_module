@@ -23,7 +23,8 @@ $(function(){
 		$('.nepali-calendar').jDatepicker({separator: '-', ADelm: 'englishDate'});
 		$('#nepali_year_start_date_bs').jDatepicker({separator: '-', ADelm: 'englishDateStart'});
 		$('#nepali_year_end_date_bs').jDatepicker({separator: '-', ADelm: 'englishDateEnd'});
-	
+		$('#fromDate').jDatepicker({separator: '-', ADelm: 'englishFromDate'});
+		$('#toDate').jDatepicker({separator: '-', ADelm: 'englishToDate'});
 		
 });
 
