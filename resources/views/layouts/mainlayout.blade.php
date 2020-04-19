@@ -37,7 +37,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Date picker -->
   <link rel="stylesheet" href="{{ url('css/jDatepicker.css') }}">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-
+  
+  <!-- Data Table -->
+  <link rel="stylesheet" href="{{ url('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
  
 
 
@@ -45,12 +47,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
 
   <!-- jQuery 3 -->
+ 
   
   <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ url('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
+  <script src="{{ url('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
   <script src="{{ url('js/main.js') }}"></script>
 
 </head>

@@ -25,6 +25,7 @@ $(function(){
 		$('#nepali_year_end_date_bs').jDatepicker({separator: '-', ADelm: 'englishDateEnd'});
 		$('#fromDate').jDatepicker({separator: '-', ADelm: 'englishFromDate'});
 		$('#toDate').jDatepicker({separator: '-', ADelm: 'englishToDate'});
+		$('#company_records').DataTable();
 		
 });
 
