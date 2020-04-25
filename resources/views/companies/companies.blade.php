@@ -18,6 +18,26 @@
         </div>
 
         <div class="panel-body">
+            <form method="POST" action="" id="FilterPrint">
+                {!! csrf_field() !!}
+               <select name="company_types" id="" >
+                   <option value="0" selected="selected">No option selected</option>
+                   @foreach ($types as $type)
+                   <?php 
+                       if($company_types == $type->id){
+                           $option = 'selected';
+                       }
+                       else{
+                           $option = '';
+                       }
+                   ?>
+                       <option value="{{$type->id}}" {{$option}}>{{$type->name}}</option>
+                   @endforeach
+               </select>
+               <input type="button" class="btn btn-primary" name="Filter" id="Filter" value="Filter">
+               <a href="/companies" class="btn btn-secondary">Clear</a>
+               
+           </form>
             <table id="company_records" class="table table-striped deals-table">
 
                 <!-- Table Headings -->
@@ -54,14 +74,18 @@
         </div>
     </div>
 </div>
-@endsection
-<script>
-    function confirmDelete() {
-        if(confirm('Are you sure to delete this item?') == true) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+<script type="text/javascript">
+    $("#Filter").on("click", function(e){
+          e.preventDefault();
+          $('#FilterPrint').attr('action', "/filtercompanies").submit();
+      });
 </script>
+<style>
+    select{
+        width: 150px;
+        height: 40px;
+        margin-bottom:10px;
+        margin-right:5px;
+    }
+</style>
+@endsection

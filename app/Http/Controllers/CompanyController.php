@@ -31,26 +31,37 @@ class CompanyController extends Controller
 
 
     $current_fiscal_year    = FiscalYear::where('current_fiscal_year', '1')->first();
+    if($this->request->input('company_types')){
+        $company_type_option = $this->request->input('company_types');
 
-
-                // $companies = $this->company->getAll();
-                // $companies = DB::table('companies')
-                //             ->selectRaw('*')
-                //             ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
-                //             ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
-                //             ->get()->toArray();
-                $companies = DB::table('companies')
+        $companies = DB::table('companies')
                             ->selectRaw('*')
-                            ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
-                           // ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
+                            ->rightJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+                            ->where('companies.company_type_id', (int)$company_type_option)
+                            ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
                             ->get()->toArray();
+    }
+    else{
 
+        // $companies = $this->company->getAll();
+        // $companies = DB::table('companies')
+        //             ->selectRaw('*')
+        //             ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+        //             ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
+        //             ->get()->toArray();
+        $companies = DB::table('companies')
+                        ->selectRaw('*')
+                        ->leftJoin('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+                     // ->where('yearly_records.fiscal_year_id',$current_fiscal_year->id)
+                        ->get()->toArray();
 
+        $company_type_option = 0;
+    }
         
          
         $types     = Type::all();
 
-	    return view('companies.companies', ['companies' => $companies,'types'=>$types,'current_fiscal_year'=>$current_fiscal_year]);
+	    return view('companies.companies', ['companies' => $companies,'types'=>$types,'current_fiscal_year'=>$current_fiscal_year,'company_types'=>$company_type_option,]);
     }
     public function edit($companyId=0)
     {
