@@ -11,6 +11,7 @@
                     <h5>Ledger</h5>
                 </div>
                 <div class="panel-body">
+                    <a href="/companies" class="btn btn-default pull-left">BACK</a>
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <div class="container responsive">
                         <div class="row">
