@@ -38,7 +38,7 @@
                             <td>{{ $year->current_fiscal_year == 1? 'Yes': 'No' }}</td>
                             <td>
                                 <a href="{{ url('Settings/fiscalyear/edit') }}/{{ $year->id }}" class="ibtn btn-icon"> <i class="fa fa-pencil" rel="tootltip" title="Edit"></i> </a>  
-                                <a href="{{ url('Settings/fiscalyear/delete') }}/{{ $year->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a>
+                                {{-- <a href="{{ url('Settings/fiscalyear/delete') }}/{{ $year->id }}" onclick="return confirmDelete()" class="ibtn btn-icon"> <i class="fa fa-remove" rel="tootltip" title="Delete"></i> </a> --}}
                             </td>
                         </tr>
                     @endforeach
