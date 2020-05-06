@@ -43,5 +43,8 @@ Route::post('records/edittotal', 'RecordsController@updateTotal');
 Route::post('/records/dateselection','RecordsController@display');
 
 
+Route::get('admin/trialbalance', 'TrialbalanceController@index');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
