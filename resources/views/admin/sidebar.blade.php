@@ -21,8 +21,6 @@
         <li class="@if(Request::is('*companies*')) {{ 'active' }} @endif"><a href="{{ url('/companies') }}"><i class="fa fa-table"></i> <span>Ledger</span></a></li>
         <li class="@if(Request::is('*/users*')) {{ 'active' }} @endif"><a href="{{ url('/admin/users') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
       @endif
-      {{-- <li class="@if(Request::is('*/posts*')) {{ 'active' }} @endif"><a href="{{ url('/admin/posts') }}"><i class="fa fa-address-book"></i> <span>Posts</span></a></li> --}}
-
       @if(\Auth::user()->id == '1')
         <li class="treeview @if(Request::is('*/trialbalance*') || Request::is('*/trading*')) {{ 'active' }} @endif">
           <a href="{{ url('/admin/trialbalance') }}"><i class="fa fa-link"></i><span>Accounts</span>
