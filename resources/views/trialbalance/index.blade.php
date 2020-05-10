@@ -24,7 +24,7 @@
         <div class="row invoice-info">
         
           <div class="form-group">
-               <form method="post" action="#">
+               <form method="post" action="/admin/trialbalance/store">
                 {!! csrf_field() !!}
                   <div class="col-md-3">
                       <input type="number" min="0" class = "form-control" step="0.01" placeholder="Cash In Hand" name="cash_in_hand" >
