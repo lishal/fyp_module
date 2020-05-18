@@ -8,6 +8,12 @@
         
             <div class="filter">
               <label for="fiscal_year">Fiscal Years: </label>
+              <select id="fiscal_year" name="fiscal_year">
+            
+                @foreach($fiscalYears as $year)
+                  <option value="{{ $year->id }}">{{ $year->fiscal_year_name }}</option>
+                @endforeach 
+                </select>
             </div>
         </div>
         <div class="row">
