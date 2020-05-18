@@ -27,6 +27,7 @@
         </div>
 
         <!-- Cash in hand -->
+        @if($current_fiscal_year->current_fiscal_year == 1)
         <div class="row invoice-info">
         
           <div class="form-group">
@@ -41,6 +42,7 @@
                  </form>
             </div>
           </div>
+          @endif
           <div class="row">
             <div class="col-xs-6 table-responsive">
               <table class="table table-striped"  id="credit-table">
@@ -75,10 +77,16 @@
                  
                   <th>S.N</th>
                   <th>Particulars</th>
+                  
                   <th style="text-align: right;">Amount</th>
                 </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>#</td>
+                    <td>Cash In Hand</td>
+                    <td style="text-align: right;">{{number_format($CashInHand->settings_description,2, '.', '')}}</td>
+                </tr>
                 </tbody>
               </table>
             </div>

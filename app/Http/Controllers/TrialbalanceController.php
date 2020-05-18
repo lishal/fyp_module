@@ -11,8 +11,13 @@ use App\FiscalYear;
 class TrialbalanceController extends Controller
 {
     public function index($fiscal_year_id = 0){
-       
+        $active_fiscal_year     = FiscalYear::where('current_fiscal_year', '1')->first();
+        if ($fiscal_year_id == 0) {
+            $fiscal_year_id = $active_fiscal_year->id;
+        }
         $fiscalYears= FiscalYear::all();
+
+        $current_fiscal_year    = FiscalYear::where('id', $fiscal_year_id)->first();
 
         $cashinhand = DB::table('settings')
                         ->where('settings_name','cashinhand')
@@ -21,7 +26,8 @@ class TrialbalanceController extends Controller
 
         return view ('trialbalance.index',[
             'fiscalYears'=>$fiscalYears,
-            'CashInHand' =>$cashinhand
+            'CashInHand' =>$cashinhand,
+            'current_fiscal_year'=> $current_fiscal_year,
         ]);
     
     }
