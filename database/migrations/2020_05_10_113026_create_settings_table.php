@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('settings_name', 100);
             $table->text('settings_description');
             $table->enum('settings_status',['0', '1'])->default('1');
+            $table->integer('fiscal_year_id');
             $table->timestamps();
         });
     }
