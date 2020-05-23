@@ -35,9 +35,10 @@ class TrialbalanceController extends Controller
     {
         $active_fiscal_year     = FiscalYear::where('current_fiscal_year', '1')->first();
         $value=$request->input('cash_in_hand');
-        $settings= Settings::all();
+       // $settings= Settings::all();
+        $settings_check     = Settings::where('settings_name','Cashinhand')->first(); 
         
-        if($settings->isEmpty()){
+        if($settings_check ==""){
             $data = [
                 'settings_name' => 'Cashinhand', 
                 'settings_description' => $value,

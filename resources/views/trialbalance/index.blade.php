@@ -82,11 +82,15 @@
                 </tr>
                 </thead>
                 <tbody>
+                  @if ( !empty ( $CashInHand ) ) 
                   <tr>
                     <td>#</td>
                     <td>Cash In Hand</td>
                     <td style="text-align: right;">{{number_format($CashInHand->settings_description,2, '.', '')}}</td>
-                </tr>
+                  </tr>
+                  @endif
+
+                  
                 </tbody>
               </table>
             </div>
