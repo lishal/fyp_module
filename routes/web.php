@@ -43,7 +43,7 @@ Route::post('records/edittotal', 'RecordsController@updateTotal');
 Route::post('/records/dateselection','RecordsController@display');
 
 
-Route::get('admin/trialbalance', 'TrialbalanceController@index');
+Route::get('admin/trialbalance/{fiscalyearid?}', 'TrialbalanceController@index');
 Route::post('admin/trialbalance/store', 'TrialbalanceController@store');
 
 Route::get('/home', 'HomeController@index')->name('home');

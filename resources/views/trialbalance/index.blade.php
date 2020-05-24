@@ -11,7 +11,7 @@
               <select id="fiscal_year" name="fiscal_year">
             
                 @foreach($fiscalYears as $year)
-                  <option value="{{ $year->id }}">{{ $year->fiscal_year_name }}</option>
+                <option value="{{ $year->id }}"@if($year->id == $current_fiscal_year->id) {{'selected'}} @endif>{{ $year->fiscal_year_name }}</option>
                 @endforeach 
                 </select>
             </div>
@@ -137,6 +137,12 @@
     </section>
 
     <script>
+      $('#fiscal_year').on('change', function(){
+          
+          var fiscal_year_id = $(this).val();
+          window.location = "{{url('admin/trialbalance/')}}/"+fiscal_year_id
+        });
+
       TrialTotalCreditorsBalance = 0;
         TrialTotalDebitBalance = 0;
 
@@ -151,6 +157,9 @@
 
         $('#TrialTotalCreditBalance').html('<h3>'+TrialTotalCreditorsBalance.toFixed(2)+'</h3>');
         $('#TrialTotalDebitBalance').html('<h3>'+TrialTotalDebitBalance.toFixed(2)+'</h3>');
+
+
+        
       </script>
 
 @endsection

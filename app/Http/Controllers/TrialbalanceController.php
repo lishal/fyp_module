@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use App\FiscalYear;
+use App\YearlyRecord;
 
 class TrialbalanceController extends Controller
 {
@@ -41,6 +42,7 @@ class TrialbalanceController extends Controller
             'current_fiscal_year'=> $current_fiscal_year,
             'openingstock'=> $openingstock,
             'SumOfDifferentAccountTypes' => $SumOfDifferentAccountTypes,
+            'active_fiscal_year'=> $active_fiscal_year
         ]);
     
     }
