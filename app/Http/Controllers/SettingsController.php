@@ -63,17 +63,99 @@ class SettingsController extends Controller
 
                  $active_fiscal_year     = DB::table('fiscal_years')->where('current_fiscal_year', '1')->first(); 
 
+                 if(!$active_fiscal_year){
+                 
+            
+                    $cashinhand = DB::table('settings')
+                                    ->where('settings_name','cashinhand')
+                                    ->where('fiscal_year_id',$active_fiscal_year->id)
+                                    ->first();
+            
+                    //last year's closing stock will new years opening stock               
+                    $openingstock = DB::table('settings')
+                                    ->where('settings_name','Closingstock')
+                                    ->where('fiscal_year_id',$active_fiscal_year->id)
+                                    ->first();
+            
+                    $NetProfit = DB::table('settings')
+                                    ->where('settings_name','NetProfit')
+                                    ->where('fiscal_year_id',$active_fiscal_year->id)
+                                    ->first();
+            
+                    
+                    $yearly_records = DB::table('companies')
+                                        ->selectRaw('*')
+                                        ->join('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+                                        ->where('yearly_records.fiscal_year_id',$active_fiscal_year->id)
+                                        ->get()->toArray();
+
+                }
            
                 if ($id == 0) {
                     $data['created_at'] = date('Y-m-d H:i:s');
                     $id=\DB::table('fiscal_years')->insert($data);
-                    $message = "Record added successfully.";
+                    $settings_check     = DB::table('Settings')->where('settings_name','' )->first(); 
+
+        
+                    if($settings_check ==""){
+                        $data = [
+                            'settings_name' => 'Cashinhand', 
+                            'settings_description' => 0,
+                            'fiscal_year_id'=>1,
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        \DB::table('settings')->insert($data);
+                        $data2 = [
+                            'settings_name' => 'Openingstock', 
+                            'settings_description' => 0,
+                            'fiscal_year_id'=>1,
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        \DB::table('settings')->insert($data2);
+                    }
+                    else{
+                    $datasettingsCashInHand = [
+
+                        'settings_name'         => 'Cashinhand',
+                        'settings_description'  => $cashinhand->settings_description,
+                        'fiscal_year_id'        => $id
+                    ];
+        
+                    $datasettingsOpeningStock = [
+        
+                        'settings_name'         => 'Openingstock',
+                        'settings_description'  => $openingstock->settings_description,
+                        'fiscal_year_id'        => $id
+                    ];
+        
+                    $datasettingsClosingStock = [
+        
+                        'settings_name'         => 'Closingstock',
+                        'settings_description'  => 0,
+                        'fiscal_year_id'        => $id
+                    ];
+        
+                    $datasettingsNetProfit = [
+        
+                        'settings_name'         => 'NetProfit',
+                        'settings_description'  => 0,
+                        'fiscal_year_id'        => $id
+                    ];
+        
+                    \DB::table('settings')->insert($datasettingsCashInHand);
+                    \DB::table('settings')->insert($datasettingsOpeningStock);
+                    \DB::table('settings')->insert($datasettingsClosingStock);
+                    \DB::table('settings')->insert($datasettingsNetProfit);
+
+                   
+                }
 
                     if($active_fiscal_year){
                         \DB::table('fiscal_years')
                         ->where('id', $active_fiscal_year->id)
                         ->update(['current_fiscal_year'=>'0']);
                     }
+                    $message = "Record added successfully.";
 
                 }
             

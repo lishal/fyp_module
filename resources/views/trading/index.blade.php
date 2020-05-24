@@ -30,7 +30,7 @@
                   <div class="row invoice-info">
                     
                       <div class="form-group">
-                           <form method="post" action="#">
+                           <form method="post" action="/admin/trading/store">
                             {!! csrf_field() !!}
                               <div class="col-md-3">
                                   <input type="text" min="0" class="form-control" placeholder="Closing Stock" name="closing_stock" value="">
@@ -201,7 +201,7 @@
                    
                  </thead>
                 <tbody>
-                    
+
                 </tbody>
                </table>
              </div>
