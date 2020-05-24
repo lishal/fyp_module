@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 @section('content-header')
-<h2>Trading Balance </h2>
+<h2>Balances </h2>
 @endsection
 @section('content')
 <div>
@@ -90,5 +90,125 @@
                   </div>
                   <!-- /.row -->
         </div>
+        <div role="tabpanel" class="tab-pane" id="profitloss">
+            <!-- title row -->
+               <div class="row">
+                 <div class="col-xs-12">
+                   <h2 class="page-header">
+                     <i class="fa fa-globe"></i> Profit & Loss Account
+                     <small class="pull-right">Date: <?php echo date('Y-m-d'); ?></small>
+                   </h2>
+                 </div>
+                 <!-- /.col -->
+               </div>
+               <!-- Table row -->
+               <div class="row">
+                 <div class="col-xs-6 table-responsive">
+                   <table class="table table-striped"  id="profit-table">
+                     <thead>
+                       <tr>
+                       <th></th>
+                       <th><h3>Profit</h3></th>
+                       <th></th>
+                       
+                     </tr>
+                     <tr>
+                       <th>S.N</th>
+                       <th>Particulars</th>
+                       <th>Amount</th>
+                     
+                     </tr>
+                     </thead>
+                     <tbody>
+                    
+                     </tbody>
+                   </table>
+                 </div>
+
+                 <div class="col-xs-6 table-responsive">
+                   <table class="table table-striped" id="loss-table">
+                     <thead>
+                       
+                       <th></th>
+                       <th><h3>Loss</h3></th>
+                       <th></th>
+                     </tr>
+                       <tr>
+                         <th>S.N</th>
+                         <th>Particulars</th>
+                         <th style="text-align: right;">Amount</th>
+                       </tr>
+                       
+                     </thead>
+                     <tbody>
+                      
+                     </tbody>
+                   </table>
+                 </div>
+                 <!-- /.col -->
+               </div>
+               <!-- /.row -->
+       </div>
+       <div role="tabpanel" class="tab-pane" id="balancesheet">
+        <!-- title row -->
+           <div class="row">
+             <div class="col-xs-12">
+               <h2 class="page-header">
+                 <i class="fa fa-globe"></i> Balance Sheet
+                 <small class="pull-right">Date: <?php echo date('Y-m-d'); ?></small>
+               </h2>
+             </div>
+             <!-- /.col -->
+           </div>
+
+
+           <!-- Table row -->
+           <div class="row">
+             <div class="col-xs-6 table-responsive">
+               <table class="table table-striped"  id="liabilties-table">
+                 <thead>
+                   <tr>
+                   <th></th>
+                   <th><h3>Liabilties</h3></th>
+                   <th></th>
+                   
+                 </tr>
+                 <tr>
+                   <th>S.N</th>
+                   <th>Particulars</th>
+                   <th style="text-align: right;">Amount</th>
+                 
+                 </tr>
+                 </thead>
+                 <tbody>
+                </tbody>
+               </table>
+             </div>
+
+             <div class="col-xs-6 table-responsive">
+               <table class="table table-striped" id="assets-table">
+                 <thead>
+                   
+                   <th></th>
+                   <th><h3>Assests</h3></th>
+                   <th></th>
+                 </tr>
+                   <tr>
+                     <th>S.N</th>
+                     <th>Particulars</th>
+                     <th style="text-align: right;">Amount</th>
+                   </tr>
+                   
+                 </thead>
+                <tbody>
+                    
+                </tbody>
+               </table>
+             </div>
+             <!-- /.col -->
+           </div>
+           <!-- /.row -->
+   </div>
+
   </div>
 @endsection
