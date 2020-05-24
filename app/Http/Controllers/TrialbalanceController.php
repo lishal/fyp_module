@@ -23,11 +23,16 @@ class TrialbalanceController extends Controller
                         ->where('settings_name','cashinhand')
                         ->where('fiscal_year_id',$fiscal_year_id)
                         ->first();
+        $openingstock = DB::table('settings')
+                        ->where('settings_name','Openingstock')
+                        ->where('fiscal_year_id',$fiscal_year_id)
+                        ->first();
 
         return view ('trialbalance.index',[
             'fiscalYears'=>$fiscalYears,
             'CashInHand' =>$cashinhand,
             'current_fiscal_year'=> $current_fiscal_year,
+            'openingstock'=> $openingstock,
         ]);
     
     }
@@ -37,6 +42,7 @@ class TrialbalanceController extends Controller
         $value=$request->input('cash_in_hand');
        // $settings= Settings::all();
         $settings_check     = Settings::where('settings_name','Cashinhand')->first(); 
+
         
         if($settings_check ==""){
             $data = [
@@ -47,6 +53,7 @@ class TrialbalanceController extends Controller
             ];
             \DB::table('settings')->insert($data);
         }
+        
         else{
             $cash=DB::table('settings')->where(['settings_name'=>'Cashinhand','fiscal_year_id'=>$active_fiscal_year->id])->get();
              $cashinhand=$cash[0]->settings_description;

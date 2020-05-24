@@ -89,7 +89,12 @@
                     <td style="text-align: right;">{{number_format($CashInHand->settings_description,2, '.', '')}}</td>
                   </tr>
                   @endif
-
+                  <tr>
+                    <td>#</td>
+                    <td>Opening Stock</td>
+                    <td style="text-align: right;">{{number_format($openingstock->settings_description, 2, '.', '')}}</td>
+                  </tr>
+               <tr>
                   
                 </tbody>
               </table>
