@@ -101,6 +101,8 @@
                  </div>
                  <!-- /.col -->
                </div>
+
+
                <!-- Table row -->
                <div class="row">
                  <div class="col-xs-6 table-responsive">
@@ -120,7 +122,30 @@
                      </tr>
                      </thead>
                      <tbody>
-                    
+                     @php ($sn = 1) 
+                        @foreach($ExpensesAccountTotals as $ExpensesAccountTotal)
+                        <tr>
+                           
+                               <td>{{$sn}}</td>
+                               <td>{{$ExpensesAccountTotal->company_name}}</td>
+                               <td style="text-align: right;">{{number_format($ExpensesAccountTotal->Balance,2,'.','')}}</td>
+                             
+
+                        </tr>
+                        @php ($sn++ )
+                        @endforeach
+                         <tr>
+                           <td>#</td>
+                           <td><b>Net Profit</b></td>
+                           <td class="NetProfit" id="NetProfit" style="text-align: right;"></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><h3>TOTAL</h3></td>
+                           <td id="TotalProfitTableBalance" style="text-align: right;"></td>
+                        </tr>
+                       
+                          
                      </tbody>
                    </table>
                  </div>
@@ -141,7 +166,16 @@
                        
                      </thead>
                      <tbody>
-                      
+                       <tr>
+                           <td></td>
+                           <td><b>Gross Profit</b></td>
+                           <td class="grossprofit" style="text-align: right;"></td>
+                       </tr>
+                        <tr>
+                           <td></td>
+                           <td><h3>TOTAL</h3></td>
+                           <td id="TotalLossTableBalance" style="text-align: right;"></td>
+                         </tr>
                      </tbody>
                    </table>
                  </div>
@@ -211,4 +245,36 @@
    </div>
 
   </div>
+
+  <script>
+
+  TradingTotalCreditBalance = 0;
+  TradingTotalDebitBalance = 0;
+  LossSideTableTotal 		= 0; 
+	ProfitSideTableTotal 	= 0
+  ProfitSideExpenseTableTotal = 0;
+  
+    Grossprofit = TradingTotalCreditBalance - TradingTotalDebitBalance;
+    TradingTotalDebitBalance = Grossprofit + TradingTotalDebitBalance;
+    $('.grossprofit').html(Grossprofit.toFixed(2));
+
+
+    $('#loss-table tr').each(function(index, value) {
+      LossSideTableTotal =  parseFloat(Number($(this).find('td:eq(2)').text())) + LossSideTableTotal ;
+    });
+
+
+
+    $('#profit-table tr').each(function(index, value) {
+
+      ProfitSideExpenseTableTotal =  parseFloat(Number($(this).find('td:eq(2)').text())) + ProfitSideExpenseTableTotal ;
+    });
+    NetProfit = Grossprofit - ProfitSideExpenseTableTotal;
+	  ProfitSideTableTotal = NetProfit + ProfitSideExpenseTableTotal;
+    $('.NetProfit').html('<b>'+NetProfit.toFixed(2)+'</b>');
+    
+    $('#TotalLossTableBalance').html('<h3>'+LossSideTableTotal.toFixed(2)+'</h3>');
+	  $('#TotalProfitTableBalance').html('<h3>'+ProfitSideTableTotal.toFixed(2)+'</h3>');
+
+    </script>
 @endsection

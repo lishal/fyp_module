@@ -50,3 +50,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('admin/trading/', 'TradingController@index');
 Route::post('admin/trading/store', 'TradingController@store');
+Route::get('admin/profitloss', 'ProfitlossController@index');
