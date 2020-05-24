@@ -266,7 +266,31 @@
                  </tr>
                  </thead>
                  <tbody>
-                </tbody>
+                 <?php $sn = 1;?>
+                 @foreach($SumOfDifferentAccountTypes as $SumOfDifferentAccountType)
+                   @if($SumOfDifferentAccountType->account_type == 'Credit' && ($SumOfDifferentAccountType->company_type_id != 9)) 
+                     <tr>
+                       <td>{{$sn}}</td>
+                       <td>{{$SumOfDifferentAccountType->name}}</td>
+                       <td id="TrialTotal{{str_replace(' ', '', $SumOfDifferentAccountType->name)}}Balance" style="text-align: right;">{{number_format(abs($SumOfDifferentAccountType->Balance),2, '.', '')}}</td>
+                     </tr>
+                      <?php $sn++; ?>
+                   @endif
+                  
+                 @endforeach
+                 <tr>
+                       <td>#</td>
+                       <td><b>Net Profit</b></td>
+                       <td class="NetProfit" style="text-align: right;"></td>
+                 </tr>
+           
+           <tr>
+             <td>&nbsp;</td>
+             <td><h3>TOTAL</h3></td>
+             <td id="TotalLiabiltiesBalance" style="text-align: right;">&nbsp;</td>
+             
+           </tr>
+     </tbody>
                </table>
              </div>
 
@@ -286,8 +310,37 @@
                    
                  </thead>
                 <tbody>
+    
+           <?php $sn = 1;?>
+         @foreach($SumOfDifferentAccountTypes as $SumOfDifferentAccountType)
+           @if($SumOfDifferentAccountType->account_type == 'Debit' && ($SumOfDifferentAccountType->company_type_id != 5 && $SumOfDifferentAccountType->company_type_id != 6 && $SumOfDifferentAccountType->company_type_id != 7 && $SumOfDifferentAccountType->company_type_id != 8) )
+             <tr>
+               <td>{{$sn}}</td>
+               <td>{{$SumOfDifferentAccountType->name}}</td>
+               <td id="TrialTotal{{str_replace(' ', '', $SumOfDifferentAccountType->name)}}Balance" style="text-align: right;">{{number_format($SumOfDifferentAccountType->Balance,2, '.', '')}}</td>
+             </tr>
+              <?php $sn++; ?>
+           @endif
+           @endforeach
+           <tr>
+                 <td>#</td>
+                 <td>Cash In Hand</td>
+                 <td style="text-align: right;">{{number_format($CashInHand->settings_description,2, '.', '')}}</td>
+             </tr>
+             <tr>
 
-                </tbody>
+               <td>#</td>
+               <td>Closing Stock</td>
+               <td style="text-align: right;">{{number_format($closingstock->settings_description,2, '.', '')}}</td>
+              </tr>
+              <tr>
+           
+          <tr>
+            <td>&nbsp;</td>
+             <td><h3>TOTAL</h3></td>
+             <td id="TotalAssetsBalance" style="text-align: right;">&nbsp;</td>
+           </tr>
+     </tbody>
                </table>
              </div>
              <!-- /.col -->
@@ -366,7 +419,9 @@ TrialTotalCreditorsBalance = 0;
 	$('#TradingTotalDebitBalance').html('<h3>'+TradingTotalDebitBalance.toFixed(2)+'</h3>');
 
 	$('#TotalLossTableBalance').html('<h3>'+LossSideTableTotal.toFixed(2)+'</h3>');
-	$('#TotalProfitTableBalance').html('<h3>'+ProfitSideTableTotal.toFixed(2)+'</h3>');
+  $('#TotalProfitTableBalance').html('<h3>'+ProfitSideTableTotal.toFixed(2)+'</h3>');
+  $('#TotalLiabiltiesBalance').html('<h3>'+liablitiesTableTotal.toFixed(2)+'</h3>');
+	$('#TotalAssetsBalance').html('<h3>'+assetsTableTotal.toFixed(2)+'</h3>');
 
 
     </script>
