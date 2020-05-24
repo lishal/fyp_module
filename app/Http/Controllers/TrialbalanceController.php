@@ -27,12 +27,20 @@ class TrialbalanceController extends Controller
                         ->where('settings_name','Openingstock')
                         ->where('fiscal_year_id',$fiscal_year_id)
                         ->first();
+        $SumOfDifferentAccountTypes = DB::table('yearly_records')
+                        ->selectRaw('SUM(yearly_record_balance) as Balance, companies.company_type_id, types.account_type, types.name')
+                        ->join('companies', 'yearly_records.company_id', '=', 'companies.id')
+                        ->join('types', 'companies.company_type_id', '=', 'types.id')
+                        ->where('fiscal_year_id',$fiscal_year_id)
+                        ->groupBy('companies.company_type_id')
+                        ->get()->toArray();
 
         return view ('trialbalance.index',[
             'fiscalYears'=>$fiscalYears,
             'CashInHand' =>$cashinhand,
             'current_fiscal_year'=> $current_fiscal_year,
             'openingstock'=> $openingstock,
+            'SumOfDifferentAccountTypes' => $SumOfDifferentAccountTypes,
         ]);
     
     }

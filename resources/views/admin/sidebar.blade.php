@@ -19,7 +19,7 @@
       @if(\Auth::user()->id == '1')
         <li class="@if(Request::is('*type*')) {{ 'active' }} @endif"><a href="{{ url('/type') }}"><i class="fa fa-database"></i> <span>Types</span></a></li>
         <li class="@if(Request::is('*companies*')) {{ 'active' }} @endif"><a href="{{ url('/companies') }}"><i class="fa fa-table"></i> <span>Ledger</span></a></li>
-        <li class="@if(Request::is('*/users*')) {{ 'active' }} @endif"><a href="{{ url('/admin/users') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+        {{-- <li class="@if(Request::is('*/users*')) {{ 'active' }} @endif"><a href="{{ url('/admin/users') }}"><i class="fa fa-user"></i> <span>Users</span></a></li> --}}
       @endif
       @if(\Auth::user()->id == '1')
         <li class="treeview @if(Request::is('*/trialbalance*') || Request::is('*/trading*')) {{ 'active' }} @endif">

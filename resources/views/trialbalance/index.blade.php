@@ -39,7 +39,7 @@
                   <div class="col-md-2">
                       <button type="submit" class="btn btn-default">SAVE</button>
                   </div>
-                 </form>
+                </form>
             </div>
           </div>
           @endif
@@ -61,7 +61,24 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                  <?php $sn = 1;?>
+                @foreach($SumOfDifferentAccountTypes as $SumOfDifferentAccountType)
+                  @if($SumOfDifferentAccountType->account_type == 'Credit')
+                    <tr>
+              				<td>{{$sn}}</td>
+              				<td>{{$SumOfDifferentAccountType->name}}</td>
+              				<td id="TrialTotal{{str_replace(' ', '', $SumOfDifferentAccountType->name)}}Balance" style="text-align: right;">{{number_format(abs($SumOfDifferentAccountType->Balance),2, '.', '')}}</td>
+              			</tr>
+                     <?php $sn++; ?>
+                  @endif
+                 
+            		@endforeach
+            			
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><h3>TOTAL</h3></td>
+                  <td id="TrialTotalCreditBalance" style="text-align: right;">&nbsp;</td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -82,6 +99,18 @@
                 </tr>
                 </thead>
                 <tbody>
+                  <?php $sn = 1;?>
+                @foreach($SumOfDifferentAccountTypes as $SumOfDifferentAccountType)
+                  @if($SumOfDifferentAccountType->account_type == 'Debit')
+                    <tr>
+                      <td>{{$sn}}</td>
+                      <td>{{$SumOfDifferentAccountType->name}}</td>
+                      <td id="TrialTotal{{str_replace(' ', '', $SumOfDifferentAccountType->name)}}Balance" style="text-align: right;">{{number_format($SumOfDifferentAccountType->Balance,2, '.', '')}}</td>
+                    </tr>
+                     <?php $sn++; ?>
+                  @endif
+                @endforeach
+
                   @if ( !empty ( $CashInHand ) ) 
                   <tr>
                     <td>#</td>
@@ -95,11 +124,33 @@
                     <td style="text-align: right;">{{number_format($openingstock->settings_description, 2, '.', '')}}</td>
                   </tr>
                <tr>
+                <tr>
+                  <td>&nbsp;</td>
+                   <td><h3>TOTAL</h3></td>
+                   <td id="TrialTotalDebitBalance" style="text-align: right;">&nbsp;</td>
+                 </tr>
                   
                 </tbody>
               </table>
             </div>
           </div>
     </section>
+
+    <script>
+      TrialTotalCreditorsBalance = 0;
+        TrialTotalDebitBalance = 0;
+
+        $('#credit-table tr').each(function(index, value) {
+          TrialTotalCreditorsBalance =  parseFloat(Number($(this).find('td:eq(2)').text())) + TrialTotalCreditorsBalance ;
+        });
+
+        $('#debit-table tr').each(function(index, value) {
+          TrialTotalDebitBalance =  parseFloat(Number($(this).find('td:eq(2)').text())) + TrialTotalDebitBalance ;
+        });
+
+
+        $('#TrialTotalCreditBalance').html('<h3>'+TrialTotalCreditorsBalance.toFixed(2)+'</h3>');
+        $('#TrialTotalDebitBalance').html('<h3>'+TrialTotalDebitBalance.toFixed(2)+'</h3>');
+      </script>
 
 @endsection
