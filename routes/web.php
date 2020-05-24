@@ -48,3 +48,4 @@ Route::post('admin/trialbalance/store', 'TrialbalanceController@store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('admin/trading/', 'TradingController@index');
