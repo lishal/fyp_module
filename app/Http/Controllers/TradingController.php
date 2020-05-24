@@ -38,21 +38,36 @@ class TradingController extends Controller
                 ->first();
 
         $ExpensesAccountTotal = DB::table('yearly_records')
-        ->selectRaw('yearly_record_balance as Balance, companies.company_type_id,companies.company_name')
-        ->join('companies', 'yearly_records.company_id', '=', 'companies.id')
-        ->where('companies.company_type_id',5)
-        ->where('fiscal_year_id',$fiscal_year_id)
-        ->get()->toArray();
+                                ->selectRaw('yearly_record_balance as Balance, companies.company_type_id,companies.company_name')
+                                ->join('companies', 'yearly_records.company_id', '=', 'companies.id')
+                                ->where('companies.company_type_id',5)
+                                ->where('fiscal_year_id',$fiscal_year_id)
+                                ->get()->toArray();
 
         $fiscalYears  = FiscalYear::all();
+
+         $SumOfDifferentAccountTypes  = DB::table('yearly_records')
+                                        ->selectRaw('SUM(yearly_record_balance) as Balance, companies.company_type_id, types.account_type, types.name')
+                                        ->join('companies', 'yearly_records.company_id', '=', 'companies.id')
+                                        ->join('types', 'companies.company_type_id', '=', 'types.id')
+                                        ->where('fiscal_year_id',$fiscal_year_id)
+                                        ->groupBy('companies.company_type_id')
+                                        ->get()->toArray();
+        $closingstock = DB::table('settings')
+                        ->where('settings_name','Closingstock')
+                        ->where('fiscal_year_id',$fiscal_year_id)
+                        ->first();
+
 
         return view('trading.index',[
             'openingstock'               => $openingstock,
             'ExpensesAccountTotals'      => $ExpensesAccountTotal,
             'CashInHand'                 => $cashinhand,
+            'closingstock'               => $closingstock,
             'fiscalYears'                => $fiscalYears,
             'current_fiscal_year'        => $current_fiscal_year, 
-            'active_fiscal_year'         => $active_fiscal_year 
+            'active_fiscal_year'         => $active_fiscal_year,
+            'SumOfDifferentAccountTypes' => $SumOfDifferentAccountTypes,
         ]);
     }
 

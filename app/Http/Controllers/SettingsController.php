@@ -63,7 +63,7 @@ class SettingsController extends Controller
 
                  $active_fiscal_year     = DB::table('fiscal_years')->where('current_fiscal_year', '1')->first(); 
 
-                 if(!$active_fiscal_year){
+                 if($active_fiscal_year!=""){
                  
             
                     $cashinhand = DB::table('settings')
@@ -112,6 +112,20 @@ class SettingsController extends Controller
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
                         \DB::table('settings')->insert($data2);
+                        $data3 = [
+                            'settings_name' => 'Closingstock', 
+                            'settings_description' => 0,
+                            'fiscal_year_id'=>1,
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        \DB::table('settings')->insert($data3);
+                        $data4 = [
+                            'settings_name' => 'NetProfit', 
+                            'settings_description' => 0,
+                            'fiscal_year_id'=>1,
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        \DB::table('settings')->insert($data4);
                     }
                     else{
                     $datasettingsCashInHand = [
