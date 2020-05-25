@@ -48,7 +48,7 @@ Route::post('admin/trialbalance/store', 'TrialbalanceController@store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('admin/trading/', 'TradingController@index');
+Route::get('admin/trading/{fiscal_year?}', 'TradingController@index');
 Route::post('admin/trading/store', 'TradingController@store');
 Route::get('admin/profitloss', 'ProfitlossController@index');
 Route::post('admin/trading/store', 'TradingController@store');

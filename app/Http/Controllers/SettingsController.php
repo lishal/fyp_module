@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
+use App\Settings;
 use App\FiscalYear;
 class SettingsController extends Controller
 {
@@ -32,7 +33,6 @@ class SettingsController extends Controller
     public function fiscalyearsave(Request $request){
         switch ($request->input('action')) {
             case 'save':
-
                 $id = $this->request->input('id');
 
                 $rules = [
@@ -61,136 +61,124 @@ class SettingsController extends Controller
                         'updated_at' => date('Y-m-d H:i:s')
                     ];
 
-                 $active_fiscal_year     = DB::table('fiscal_years')->where('current_fiscal_year', '1')->first(); 
+            
 
-                 if($active_fiscal_year!=""){
-                 
-            
-                    $cashinhand = DB::table('settings')
-                                    ->where('settings_name','cashinhand')
-                                    ->where('fiscal_year_id',$active_fiscal_year->id)
-                                    ->first();
-            
-                    //last year's closing stock will new years opening stock               
-                    $openingstock = DB::table('settings')
-                                    ->where('settings_name','Closingstock')
-                                    ->where('fiscal_year_id',$active_fiscal_year->id)
-                                    ->first();
-            
-                    $NetProfit = DB::table('settings')
-                                    ->where('settings_name','NetProfit')
-                                    ->where('fiscal_year_id',$active_fiscal_year->id)
-                                    ->first();
-            
-                    
-                    $yearly_records = DB::table('companies')
-                                        ->selectRaw('*')
-                                        ->join('yearly_records','companies.id' , '=', 'yearly_records.company_id')
-                                        ->where('yearly_records.fiscal_year_id',$active_fiscal_year->id)
-                                        ->get()->toArray();
+                $active_fiscal_year     = DB::table('fiscal_years')->where('current_fiscal_year', '1')->first(); 
 
-                }
-           
-                if ($id == 0) {
+
+                $cashinhand = DB::table('settings')
+                                ->where('settings_name','cashinhand')
+                                ->where('fiscal_year_id',$active_fiscal_year->id)
+                                ->first();
+
+                //last year's closing stock will new years opening stock               
+                $openingstock = DB::table('settings')
+                                ->where('settings_name','Closingstock')
+                                ->where('fiscal_year_id',$active_fiscal_year->id)
+                                ->first();
+
+                $NetProfit = DB::table('settings')
+                                ->where('settings_name','NetProfit')
+                                ->where('fiscal_year_id',$active_fiscal_year->id)
+                                ->first();
+
+                
+                $yearly_records = DB::table('companies')
+                                    ->selectRaw('*')
+                                    ->join('yearly_records','companies.id' , '=', 'yearly_records.company_id')
+                                    ->where('yearly_records.fiscal_year_id',$active_fiscal_year->id)
+                                    ->get()->toArray();
+            
+
+                if($id == 0) {
                     $data['created_at'] = date('Y-m-d H:i:s');
-                    $id=\DB::table('fiscal_years')->insert($data);
-                    $settings_check     = DB::table('Settings')->where('settings_name','' )->first(); 
+                    $id = \DB::table('fiscal_years')->insertGetId($data);
 
-        
-                    if($settings_check ==""){
-                        $data = [
-                            'settings_name' => 'Cashinhand', 
-                            'settings_description' => 0,
-                            'fiscal_year_id'=>1,
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ];
-                        \DB::table('settings')->insert($data);
-                        $data2 = [
-                            'settings_name' => 'Openingstock', 
-                            'settings_description' => 0,
-                            'fiscal_year_id'=>1,
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ];
-                        \DB::table('settings')->insert($data2);
-                        $data3 = [
-                            'settings_name' => 'Closingstock', 
-                            'settings_description' => 0,
-                            'fiscal_year_id'=>1,
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ];
-                        \DB::table('settings')->insert($data3);
-                        $data4 = [
-                            'settings_name' => 'NetProfit', 
-                            'settings_description' => 0,
-                            'fiscal_year_id'=>1,
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ];
-                        \DB::table('settings')->insert($data4);
-                    }
-                    else{
+                    $message = "Record added successfully.";
+
                     $datasettingsCashInHand = [
 
                         'settings_name'         => 'Cashinhand',
                         'settings_description'  => $cashinhand->settings_description,
                         'fiscal_year_id'        => $id
                     ];
-        
+
                     $datasettingsOpeningStock = [
-        
+
                         'settings_name'         => 'Openingstock',
                         'settings_description'  => $openingstock->settings_description,
                         'fiscal_year_id'        => $id
                     ];
-        
+
                     $datasettingsClosingStock = [
-        
+
                         'settings_name'         => 'Closingstock',
                         'settings_description'  => 0,
                         'fiscal_year_id'        => $id
                     ];
-        
+
                     $datasettingsNetProfit = [
-        
+
                         'settings_name'         => 'NetProfit',
                         'settings_description'  => 0,
                         'fiscal_year_id'        => $id
                     ];
-        
+
                     \DB::table('settings')->insert($datasettingsCashInHand);
                     \DB::table('settings')->insert($datasettingsOpeningStock);
                     \DB::table('settings')->insert($datasettingsClosingStock);
                     \DB::table('settings')->insert($datasettingsNetProfit);
 
-                   
-                }
+                    foreach ($yearly_records as $yearly_record) {
+                        if($yearly_record->fiscal_year_id == $active_fiscal_year->id) {
+                        $dataRecord = [
+                            'record_particular'  => 'B/D',
+                            'record_CBF'         => 0,
+                            'record_debit'       => ($yearly_record->yearly_record_status == 'dr')?abs($yearly_record->yearly_record_balance): 0,
+                            'record_credit'      => ($yearly_record->yearly_record_status == 'cr')?abs($yearly_record->yearly_record_balance): 0, 
+                            'record_status'      => '1',
+                            'company_id'         => $yearly_record->company_id,
+                            'record_created_date'=> $nepali_year_start_date_bs,
+                            'record_english_date'=> $fiscal_year_start_date_ad,
+                            'fiscal_year_id'     => $id
+                        
+                        ];
+                    
+                            \DB::table('records')->insert($dataRecord);
+                        
 
-                    if($active_fiscal_year){
-                        \DB::table('fiscal_years')
-                        ->where('id', $active_fiscal_year->id)
-                        ->update(['current_fiscal_year'=>'0']);
+                        $dataYearlyRecord = [
+                            'company_id'           => $yearly_record->company_id,
+                            'yearly_record_status' => $yearly_record->yearly_record_status,
+                            'yearly_record_balance'=> $yearly_record->yearly_record_balance,
+                            'fiscal_year_id'     => $id
+                        
+                        ];
+
+                        
+                        \DB::table('yearly_records')->insert($dataYearlyRecord);
+
                     }
-                    $message = "Record added successfully.";
+                }
+
+                    \DB::table('fiscal_years')
+                    ->where('id', $active_fiscal_year->id)
+                    ->update(['current_fiscal_year'=>'0']);
 
                 }
-            
-
-                
                 else {
                     \DB::table('fiscal_years')
-                    
                     ->where('id', $id)
                     ->update($data);
                     $message = "Record updated successfully.";
-                }
-                return redirect('Settings/fiscalyears')->with('success',$message);
+        }
+        return redirect('Settings/fiscalyears')->with('success',$message);
             break;
 
         case 'cancel':
             return redirect('Settings/fiscalyears');
         break;
         }
-       
-
     }
     public function fiscalyeardelete($id)
     {

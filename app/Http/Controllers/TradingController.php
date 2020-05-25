@@ -78,4 +78,15 @@ class TradingController extends Controller
         ]);
                return redirect('admin/trading');
     }
+    public function update(Request $request, Trading $trading)
+    {
+       $active_fiscal_year     = FiscalYear::where('current_fiscal_year', '1')->first();
+       $tradingRequest = $request->input();
+       $documents =  DB::table('settings')->where('settings_name','NetProfit')->where('fiscal_year_id',$active_fiscal_year->id)->update([
+
+            'settings_description' => $tradingRequest['NetProfit'],
+         ]);
+
+       return response()->json(array('success' => true), 200);
+    }
 }

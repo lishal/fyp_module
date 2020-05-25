@@ -3,7 +3,7 @@
 <h2>Balances </h2>
 @endsection
 @section('content')
-<div>
+<section class="invoice">
   <div class="row">
         
     <div class="filter">
@@ -39,7 +39,7 @@
               </div>
               <!-- info row -->
               <div class="row invoice-info">
-                
+                @if($current_fiscal_year->current_fiscal_year == 1)
                   <div class="form-group">
                        <form method="post" action="/admin/trading/store">
                         {!! csrf_field() !!}
@@ -51,6 +51,7 @@
                           </div>
                          </form>
                     </div>
+                  @endif
               </div>
               <!-- /.row -->
 
@@ -433,6 +434,25 @@ TrialTotalCreditorsBalance = 0;
   $('#TotalProfitTableBalance').html('<h3>'+ProfitSideTableTotal.toFixed(2)+'</h3>');
   $('#TotalLiabiltiesBalance').html('<h3>'+liablitiesTableTotal.toFixed(2)+'</h3>');
 	$('#TotalAssetsBalance').html('<h3>'+assetsTableTotal.toFixed(2)+'</h3>');
+
+  $(document).ready(function(){
+        
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+              url: 'trading/update',
+              data: ({ NetProfit: $('#NetProfit').text()}),
+              success: function(data) {
+                
+                  
+              }
+        });
+      });
+      $('#fiscal_year').on('change', function(){
+        var fiscal_year_id = $(this).val();
+        window.location = "{{url('admin/trading/')}}/"+fiscal_year_id
+      });
 
 
     </script>
