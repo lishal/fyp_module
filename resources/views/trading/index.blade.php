@@ -4,7 +4,18 @@
 @endsection
 @section('content')
 <div>
-
+  <div class="row">
+        
+    <div class="filter">
+      <label for="fiscal_year">Fiscal Years: </label>
+      <select id="fiscal_year" name="fiscal_year">
+        
+      @foreach($fiscalYears as $year)
+        <option value="{{ $year->id }}"@if($year->id == $current_fiscal_year->id) {{'selected'}} @endif>{{ $year->fiscal_year_name }}</option>
+      @endforeach 
+      </select>
+    </div>
+  </div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#trading" aria-controls="trading" role="tab" data-toggle="tab">Trading</a></li>
