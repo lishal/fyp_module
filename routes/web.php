@@ -52,3 +52,5 @@ Route::get('admin/trading/{fiscal_year?}', 'TradingController@index');
 Route::post('admin/trading/store', 'TradingController@store');
 Route::get('admin/profitloss', 'ProfitlossController@index');
 Route::post('admin/trading/store', 'TradingController@store');
+
+Route::get('admin/pdf/print', 'PdfController@index');

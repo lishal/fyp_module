@@ -3,6 +3,7 @@
 <h2>Balances </h2>
 @endsection
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <section class="invoice">
   <div class="row">
         
