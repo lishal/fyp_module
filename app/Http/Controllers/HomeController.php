@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Company;
+use App\Type;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $company= Company::count(); 
+        $type= Type::count(); 
+        // return($company);
+        return view('home',['company'=>$company,'type'=>$type]);
     }
 }

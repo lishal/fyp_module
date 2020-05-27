@@ -32,9 +32,16 @@
 <div class="column ">
     <div class="card" style="border-bottom-color: #8ACA2B;">
       <h3>Total Company</h3>
-      <p></p>
+      <p>{{$company}}</p>
     </div>
   </div>
+  <div class="column ">
+    <div class="card" style="border-bottom-color: #8ACA2B;">
+      <h3>Total Account Type</h3>
+      <p>{{$type}}</p>
+    </div>
+  </div>
+
 
 
 @endsection
