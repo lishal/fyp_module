@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="panel-body">
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('#') }}" enctype="multipart/form-data" target ="_blank">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/pdf/getneratePDF') }}" enctype="multipart/form-data" target ="_blank">
         {!! csrf_field() !!}
         <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
             <label class="col-md-2 control-label">Year</label>

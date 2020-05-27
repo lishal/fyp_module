@@ -54,3 +54,4 @@ Route::get('admin/profitloss', 'ProfitlossController@index');
 Route::post('admin/trading/store', 'TradingController@store');
 
 Route::get('admin/pdf/print', 'PdfController@index');
+Route::post('admin/pdf/getneratePDF', 'PdfController@generatePDF');
