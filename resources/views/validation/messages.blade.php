@@ -18,6 +18,7 @@
 <script>
 
 setTimeout(function() {
-    $('#success').fadeOut("slow","swing")
+    $('#success').fadeOut("slow","swing"),
+    $('#error').fadeOut("slow","swing")
 }, 2000);
 </script>

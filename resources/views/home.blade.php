@@ -30,15 +30,17 @@
 </style>
 
 <div class="column ">
-    <div class="card" style="border-bottom-color: #8ACA2B;">
+    <div class="card" style="border-bottom-color: #3c8dbc;">
       <h3>Total Company</h3>
       <p>{{$company}}</p>
+      <a href="{{ url('/companies') }}"><button class="btn" style="background-color:#3c8dbc; color:white; border-radius:10px;">View Company</button></a>
     </div>
   </div>
   <div class="column ">
-    <div class="card" style="border-bottom-color: #8ACA2B;">
+    <div class="card" style="border-bottom-color: #3c8dbc;">
       <h3>Total Account Type</h3>
       <p>{{$type}}</p>
+      <a href="{{ url('/type') }}"><button class="btn" style="background-color:#3c8dbc; color:white; border-radius:10px;">View Account Type</button></a>
     </div>
   </div>
 
